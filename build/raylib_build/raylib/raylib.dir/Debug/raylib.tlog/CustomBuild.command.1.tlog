@@ -1,0 +1,10 @@
+^C:\USERS\WIN\DOCUMENTS\2D_MC\RAYLIB\SRC\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/win/Documents/2d_mc -BC:/Users/win/Documents/2d_mc/build --check-stamp-file C:/Users/win/Documents/2d_mc/build/raylib_build/raylib/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

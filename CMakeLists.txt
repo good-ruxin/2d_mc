@@ -23,7 +23,7 @@ find_package(nlohmann_json CONFIG REQUIRED)
 add_subdirectory("raylib" raylib_build)
 
 # 4. 生成可执行文件并链接
-add_executable(2d_mc main.cpp)
+add_executable(2d_mc src/main.cpp)
 
 target_link_libraries(2d_mc PRIVATE
     raylib
