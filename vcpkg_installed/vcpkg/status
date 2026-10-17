@@ -1,0 +1,42 @@
+Package: vcpkg-cmake-config
+Version: 2024-05-23
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 538f8392b74faed50a39860b4d8e368fe788b47ec4aab565532c546cf658a2b0
+Status: install ok installed
+
+Package: vcpkg-cmake
+Version: 2024-04-23
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 7d4bbbb0050c8e3d955532970158b4db83fbdf17a44e49f5fda28ea42c889c38
+Status: install ok installed
+
+Package: entt
+Version: 3.16.0
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 457176fe9fe2c2584da32328aa27544a25a9a153c87bb71313dd2ea79caaa1a5
+Description: Gaming meets modern C++ - a fast and reliable entity-component system and much more
+Status: install ok installed
+
+Package: imgui
+Version: 1.92.7
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 8e5908d6317d7d12f656d6d70bc58dbea142087c4ad7428f08565567ce84210b
+Description: Bloat-free Immediate Mode Graphical User interface for C++ with minimal dependencies.
+Status: install ok installed
+
+Package: nlohmann-json
+Version: 3.12.0
+Port-Version: 2
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 0c9755db923b2b3b2dbf0fff46943b2ec62c7c5719e42fc1209f864a0c57c0f6
+Description: JSON for Modern C++
+Status: install ok installed
+

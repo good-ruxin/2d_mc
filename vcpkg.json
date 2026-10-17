@@ -1,0 +1,9 @@
+{
+  "name": "2d-mc",
+  "version": "1.0.0",
+  "dependencies": [
+    "entt",
+    "nlohmann-json",
+    "imgui"
+  ]
+}
