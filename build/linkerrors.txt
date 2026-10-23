@@ -1,0 +1,575 @@
+================================================================================
+Linker Errors
+Generated: 2026-10-17T14:32:35.174Z
+Total Errors: 190
+================================================================================
+
+[LNK4098] (MSVC)
+默认库“MSVCRTD”与其他库的使用冲突；请使用 /NODEFAULTLIB:library [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“calloc”(在“libucrt.lib(calloc.obj)”中定义)已由“raylib.lib(utils.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“calloc”(在“ libucrt.lib(calloc.obj)”中定义)已由“raylib.lib(rcore.obj)”(函数“SetWindowIcons”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“calloc”(在“libucrt.lib(calloc.obj)”中定义)已由“raylib.lib(rtextures.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“calloc”(在“libucrt.lib(calloc.obj)”中定义)已由“raylib.lib(rtext.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“calloc”(在“libucrt.lib(calloc.obj)”中定义)已由“raylib.lib(rmodels.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“free”(在“libucrt.lib(free.obj)”中定义)已由“raylib.lib(utils.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“free”(在“libucrt.lib(free.obj)”中定义)已由“raylib.lib(init.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“free”(在“ libucrt.lib(free.obj)”中定义)已由“raylib.lib(rcore.obj)”(函数“SetWindowIcons”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“free”(在“ libucrt.lib(free.obj)”中定义)已由“raylib.lib(rtextures.obj)”(函数“stbi_zlib_decode_noheader_buffer”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“free”(在“libucrt.lib(free.obj)”中定义)已由“raylib.lib(rtext.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“free”(在“libucrt.lib(free.obj)”中定义)已由“raylib.lib(rmodels.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“malloc”(在“libucrt.lib(malloc.obj)”中定义)已由“raylib.lib(utils.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“malloc”(在“libucrt.lib(malloc.obj)”中定义)已由“raylib.lib(init.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“malloc”(在“ libucrt.lib(malloc.obj)”中定义)已由“raylib.lib(rcore.obj)”(函数“LoadDirectoryFiles”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“malloc”(在“libucrt.lib(malloc.obj)”中定义)已由“raylib.lib(rtextures.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“malloc”(在“libucrt.lib(malloc.obj)”中定义)已由“raylib.lib(rtext.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“malloc”(在“libucrt.lib(malloc.obj)”中定义)已由“raylib.lib(rmodels.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“_errno”(在“ libucrt.lib(errno.obj)”中定义)已由“raylib.lib(rcore.obj)”(函数“opendir”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“_errno”(在“libucrt.lib(errno.obj)”中定义)已由“raylib.lib(rmodels.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“fclose”(在“ libucrt.lib(fclose.obj)”中定义)已由“raylib.lib(rcore.obj)”(函数“GetFileLength”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“fclose”(在“libucrt.lib(fclose.obj)”中定义)已由“raylib.lib(rtextures.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“fclose”(在“libucrt.lib(fclose.obj)”中定义)已由“raylib.lib(rmodels.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“fclose”(在“libucrt.lib(fclose.obj)”中定义)已由“raylib.lib(utils.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“__stdio_common_vsprintf”(在“libucrt.lib(output.obj)”中定义)已由“raylib.lib(utils.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“__stdio_common_vsprintf”(在“libucrt.lib(output.obj)”中定义)已由“raylib.lib(init.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“__stdio_common_vsprintf”(在“libucrt.lib(output.obj)”中定义)已由“raylib.lib(win32_joystick.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“__stdio_common_vsprintf”(在“ libucrt.lib(output.obj)”中定义)已由“raylib.lib(rcore.obj)”(函数“_vsnprintf_l”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“__stdio_common_vsprintf”(在“libucrt.lib(output.obj)”中定义)已由“raylib.lib(rtextures.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“__stdio_common_vsprintf”(在“libucrt.lib(output.obj)”中定义)已由“raylib.lib(rtext.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“__stdio_common_vsprintf”(在“libucrt.lib(output.obj)”中定义)已由“raylib.lib(rmodels.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“strncmp”(在“libucrt.lib(strncmp.obj)”中定义)已由“raylib.lib(context.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“strncmp”(在“libucrt.lib(strncmp.obj)”中定义)已由“raylib.lib(egl_context.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“strncmp”(在“ libucrt.lib(strncmp.obj)”中定义)已由“raylib.lib(rcore.obj)”(函数“glad_gl_find_core_gl”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“strncmp”(在“libucrt.lib(strncmp.obj)”中定义)已由“raylib.lib(rmodels.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“strncmp”(在“libucrt.lib(strncmp.obj)”中定义)已由“raylib.lib(init.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“strncmp”(在“libucrt.lib(strncmp.obj)”中定义)已由“raylib.lib(input.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“strpbrk”(在“ libucrt.lib(strpbrk.obj)”中定义)已由“raylib.lib(rcore.obj)”(函数“strprbrk”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“sinf”(在“ libucrt.lib(sinf.obj)”中定义)已由“raylib.lib(rcore.obj)”(函数“rlRotatef”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“sinf”(在“libucrt.lib(sinf.obj)”中定义)已由“raylib.lib(rtextures.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“sinf”(在“libucrt.lib(sinf.obj)”中定义)已由“raylib.lib(rmodels.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“sinf”(在“libucrt.lib(sinf.obj)”中定义)已由“raylib.lib(rshapes.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“frexp”(在“ libucrt.lib(frexp.obj)”中定义)已由“raylib.lib(rtextures.obj)”(函数“stbiw__linear_to_rgbe”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“fmodf”(在“ libucrt.lib(fmodf.obj)”中定义)已由“raylib.lib(rtextures.obj)”(函数“ColorFromHSV”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“__acrt_iob_func”(在“ libucrt.lib(_file.obj)”中定义)已由“raylib.lib(rtextures.obj)”(函数“printf”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“__acrt_iob_func”(在“libucrt.lib(_file.obj)”中定义)已由“raylib.lib(rmodels.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“__acrt_iob_func”(在“libucrt.lib(_file.obj)”中定义)已由“raylib.lib(utils.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“fflush”(在“ libucrt.lib(fflush.obj)”中定义)已由“raylib.lib(rtextures.obj)”(函数“qoi_write”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“fflush”(在“libucrt.lib(fflush.obj)”中定义)已由“raylib.lib(utils.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“__stdio_common_vfprintf”(在“ libucrt.lib(output.obj)”中定义)已由“raylib.lib(rtextures.obj)”(函数“_vfprintf_l”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“__stdio_common_vfprintf”(在“libucrt.lib(output.obj)”中定义)已由“raylib.lib(rmodels.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“__stdio_common_vfprintf”(在“libucrt.lib(output.obj)”中定义)已由“raylib.lib(utils.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“qsort”(在“ libucrt.lib(qsort.obj)”中定义)已由“raylib.lib(rtext.obj)”(函数“stbrp_pack_rects”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“qsort”(在“libucrt.lib(qsort.obj)”中定义)已由“raylib.lib(rmodels.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4286] (MSVC)
+符号“qsort”(在“libucrt.lib(qsort.obj)”中定义)已由“raylib.lib(monitor.obj)”导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“qsort”(在“ libucrt.lib(qsort.obj)”中定义)已由“raylib.lib(win32_joystick.obj)”(函数“_glfwUpdateGamepadGUIDWin32”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“ceil”(在“ libucrt.lib(ceil.obj)”中定义)已由“raylib.lib(rtext.obj)”(函数“stbtt_GetGlyphBitmapBoxSubpixel”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“atoi”(在“ libucrt.lib(atox.obj)”中定义)已由“raylib.lib(rmodels.obj)”(函数“cgltf_json_to_int”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“atoll”(在“ libucrt.lib(atox.obj)”中定义)已由“raylib.lib(rmodels.obj)”(函数“cgltf_json_to_size”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“exit”(在“ libucrt.lib(exit.obj)”中定义)已由“raylib.lib(utils.obj)”(函数“TraceLog”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK4217] (MSVC)
+符号“wcscmp”(在“ libucrt.lib(wcscmpc.obj)”中定义)已由“raylib.lib(win32_monitor.obj)”(函数“_glfwPollMonitorsWin32”中)导入 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_realloc [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_realloc [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_realloc [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_realloc [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_realloc [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_realloc [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_system，函数 OpenURL 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_feof，函数 LoadAutomationEventList 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_feof [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_fgets，函数 LoadAutomationEventList 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fgets [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_fopen，函数 GetFileLength 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fopen [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fopen [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fopen [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_fseek，函数 GetFileLength 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fseek [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fseek [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fseek [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_ftell，函数 GetFileLength 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_ftell [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_ftell [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp___stdio_common_vsscanf，函数 _vsscanf_l 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp___stdio_common_vsscanf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp___stdio_common_vsscanf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp___stdio_common_vsscanf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_strncpy [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_strncpy [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_strncpy [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_strncpy [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_strncpy [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_strncpy [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_strncpy [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp__time64，函数 time 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_floor，函数 rlGenTextureMipmaps 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_floor [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_round，函数 SetupFramebuffer 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_round [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fmaxf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fmaxf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fmaxf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fmaxf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fmaxf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fminf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fminf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fminf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fminf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fminf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fminf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_roundf，函数 GetFPS 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_acosf，函数 QuaternionSlerp 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_acosf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_acosf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_asinf，函数 QuaternionToEuler 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_atan2f，函数 LoadVrStereoConfig 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_cosf，函数 rlRotatef 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_cosf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_cosf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_cosf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_floorf，函数 Wrap 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_floorf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_sqrtf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_sqrtf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_sqrtf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_sqrtf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_sqrtf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__wassert [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp__stat64i32，函数 stat 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp__access，函数 FileExists 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp__findclose，函数 closedir 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp__findfirst64i32，函数 opendir 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp__findnext64i32，函数 readdir 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp__getcwd，函数 GetWorkingDirectory 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp__chdir，函数 ChangeDirectory 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp__chdir [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp__mkdir，函数 MakeDirectory 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp__fdsign，函数 GenImageGradientLinear 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_fmax，函数 GenImageGradientRadial 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fmax [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_fmin，函数 GenImageGradientRadial 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fmin [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_hypot，函数 GenImageCellular 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp__hypotf，函数 hypotf 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_ceilf，函数 ImageToPOT 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_ceilf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_ceilf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_logf，函数 ImageToPOT 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_logf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_powf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_powf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_powf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_powf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_powf [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_fopen_s，函数 stbi__fopen 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_ferror，函数 stbi__start_callbacks 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_fgetc，函数 stbi__start_callbacks 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_fread，函数 stbi__start_callbacks 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fread [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fread [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_fwrite，函数 qoi_write 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_fwrite [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_ungetc，函数 stbi__start_callbacks 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_atof，函数 cgltf_json_to_float 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp__ftelli64，函数 cgltf_default_file_read 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_puts，函数 par_shapes_create_lsystem 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_rand，函数 par_shapes__pick_rule 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_strcspn，函数 cgltf_decode_string 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_strcspn [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_strerror，函数 tinyobj_parse_and_index_mtl_file 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_strspn，函数 tinyobj_parse_and_index_mtl_file 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_strspn [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_strtok，函数 par_shapes_create_lsystem 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2001] (MSVC)
+无法解析的外部符号 __imp_strtok [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_strtol，函数 _glfwParseUriList 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_strtoul，函数 parseMapping 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK2019] (MSVC)
+无法解析的外部符号 __imp_wcscpy，函数 createMonitor 中引用了该符号 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]
+
+[LNK1120] (MSVC)
+55 个无法解析的外部命令 [C:\Users\win\Documents\2d_mc\build\2d_mc.vcxproj]

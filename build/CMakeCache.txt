@@ -178,7 +178,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=2d_mc
+CMAKE_PROJECT_NAME:STATIC=Minecraft2D
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION:STATIC=3.4.0
@@ -322,6 +322,15 @@ GLFW_USE_HYBRID_HPG:BOOL=OFF
 
 //Include everything disabled by default (for CI usage
 INCLUDE_EVERYTHING:BOOL=OFF
+
+//Value Computed by CMake
+Minecraft2D_BINARY_DIR:STATIC=C:/Users/win/Documents/2d_mc/build
+
+//Value Computed by CMake
+Minecraft2D_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Minecraft2D_SOURCE_DIR:STATIC=C:/Users/win/Documents/2d_mc
 
 //Force a specific OpenGL Version?
 OPENGL_VERSION:STRING=OFF

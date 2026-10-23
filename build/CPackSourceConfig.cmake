@@ -18,7 +18,7 @@ set(CPACK_DEBIAN_PACKAGE_DEPENDS "libatomic1, libc6, libglfw3, libglu1-mesa | li
 set(CPACK_DEBIAN_PACKAGE_NAME "libraylib-dev")
 set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS "OFF")
 set(CPACK_DEFAULT_PACKAGE_DESCRIPTION_FILE "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Templates/CPack.GenericDescription.txt")
-set(CPACK_DEFAULT_PACKAGE_DESCRIPTION_SUMMARY "2d_mc built using CMake")
+set(CPACK_DEFAULT_PACKAGE_DESCRIPTION_SUMMARY "Minecraft2D built using CMake")
 set(CPACK_DMG_SLA_USE_RESOURCE_FILE_LICENSE "ON")
 set(CPACK_GENERATOR "7Z;ZIP")
 set(CPACK_IGNORE_FILES "/CVS/;/\\.svn/;/\\.bzr/;/\\.hg/;/\\.git/;\\.swp\$;\\.#;/#")

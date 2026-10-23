@@ -1,0 +1,161 @@
+INFO: Initializing raylib 5.5
+INFO: Platform backend: DESKTOP (GLFW)
+INFO: Supported raylib modules:
+INFO:     > rcore:..... loaded (mandatory)
+INFO:     > rlgl:...... loaded (mandatory)
+INFO:     > rshapes:... loaded (optional)
+INFO:     > rtextures:. loaded (optional)
+INFO:     > rtext:..... loaded (optional)
+INFO:     > rmodels:... loaded (optional)
+INFO:     > raudio:.... loaded (optional)
+INFO: DISPLAY: Trying to enable VSYNC
+INFO: DISPLAY: Device initialized successfully
+INFO:     > Display size: 1920 x 1080
+INFO:     > Screen size:  1280 x 720
+INFO:     > Render size:  1533 x 862
+INFO:     > Viewport offsets: 0, 0
+INFO: GLAD: OpenGL extensions loaded successfully
+INFO: GL: Supported extensions count: 247
+INFO: GL: OpenGL device information:
+INFO:     > Vendor:   Intel
+INFO:     > Renderer: Intel(R) Iris(R) Xe Graphics
+INFO:     > Version:  3.3.0 - Build 32.0.101.7092
+INFO:     > GLSL:     3.30 - Build 32.0.101.7092
+INFO: GL: VAO extension detected, VAO functions loaded successfully
+INFO: GL: NPOT textures extension detected, full NPOT textures supported
+INFO: GL: DXT compressed textures supported
+INFO: GL: ETC2/EAC compressed textures supported
+INFO: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+INFO: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 1] Default texture loaded successfully
+INFO: SHADER: [ID 1] Vertex shader compiled successfully
+INFO: SHADER: [ID 2] Fragment shader compiled successfully
+INFO: SHADER: [ID 3] Program shader loaded successfully
+INFO: SHADER: [ID 3] Default shader loaded successfully
+INFO: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+INFO: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+INFO: RLGL: Default OpenGL state initialized successfully
+INFO: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Default font loaded successfully (224 glyphs)
+INFO: SYSTEM: Working Directory: C:\Users\win\Documents\2d_mc
+INFO: TIMER: Target time per frame: 16.667 milliseconds
+INFO: TEXTURE: [ID 3] Texture loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:/Windows/Fonts/simhei.ttf] File loaded successfully
+WARNING: FONT: Character [0x0000007c] size is bigger than expected font size
+INFO: TEXTURE: [ID 4] Texture loaded successfully (2048x1024 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Data loaded successfully (48 pixel size | 512 glyphs)
+INFO: UI font: C:/Windows/Fonts/simhei.ttf (512 glyphs, atlas 2048x1024)
+INFO: TEXTURE: [ID 5] Texture loaded successfully (128x128 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 6] Texture loaded successfully (2x2 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\environment/sun.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (32x32 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 7] Texture loaded successfully (32x32 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\environment/moon_phases.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (128x64 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 8] Texture loaded successfully (128x64 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\block/dirt.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 9] Texture loaded successfully (16x16 | R8G8B8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\block/stone.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | GRAYSCALE | 1 mipmaps)
+INFO: TEXTURE: [ID 10] Texture loaded successfully (16x16 | GRAYSCALE | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\block/oak_leaves.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 11] Texture loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\block/oak_log.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 12] Texture loaded successfully (16x16 | R8G8B8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\block/short_grass.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 13] Texture loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\block/grass_block_side.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 14] Texture loaded successfully (16x16 | R8G8B8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\block/dandelion.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 15] Texture loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\entity/pig/pig.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (64x32 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 16] Texture loaded successfully (64x32 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\entity/player/wide/steve.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (64x64 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 17] Texture loaded successfully (64x64 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\item/wooden_pickaxe.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 18] Texture loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\gui/sprites/hud/hotbar.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (182x22 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 19] Texture loaded successfully (182x22 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\gui/sprites/hud/heart/container.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (9x9 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 20] Texture loaded successfully (9x9 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\gui/sprites/hud/heart/full.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (9x9 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 21] Texture loaded successfully (9x9 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\gui/sprites/hud/food_full.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (9x9 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 22] Texture loaded successfully (9x9 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\gui/sprites/hud/hotbar_selection.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (24x23 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 23] Texture loaded successfully (24x23 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\item/wooden_axe.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 24] Texture loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\block/crafting_table_front.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 25] Texture loaded successfully (16x16 | R8G8B8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\block/torch.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 26] Texture loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\block/oak_planks.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 27] Texture loaded successfully (16x16 | R8G8B8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\block/cobblestone.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 28] Texture loaded successfully (16x16 | R8G8B8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\item/bread.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 29] Texture loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\item/wooden_sword.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 30] Texture loaded successfully (16x16 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc\assets\gui/sprites/hud/crosshair.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (15x15 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 31] Texture loaded successfully (15x15 | R8G8B8A8 | 1 mipmaps)
+INFO: Screenshot requested: C:\Users\win\Documents\2d_mc\screenshots\movement_test.png
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc/.mc2d_capture.png] File saved successfully
+INFO: FILEIO: [C:\Users\win\Documents\2d_mc/.mc2d_capture.png] Image exported successfully
+INFO: SYSTEM: [C:\Users\win\Documents\2d_mc/.mc2d_capture.png] Screenshot taken successfully
+INFO: TEXTURE: [ID 5] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 6] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 7] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 8] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 16] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 10] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 31] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 20] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 9] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 11] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 12] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 13] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 30] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 15] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 14] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 17] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 18] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 21] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 19] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 22] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 23] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 24] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 25] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 26] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 27] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 28] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 29] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 3] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 4] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 2] Unloaded texture data from VRAM (GPU)
+INFO: SHADER: [ID 3] Default shader unloaded successfully
+INFO: TEXTURE: [ID 1] Default texture unloaded successfully
+INFO: Window closed successfully

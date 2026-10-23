@@ -1,0 +1,7 @@
+C:\Users\win\Documents\2d_mc\src\client\main.cpp;C:\Users\win\Documents\2d_mc\build\mc2d_client.dir\Debug\main.obj
+C:\Users\win\Documents\2d_mc\src\client\assets.cpp;C:\Users\win\Documents\2d_mc\build\mc2d_client.dir\Debug\assets.obj
+C:\Users\win\Documents\2d_mc\src\client\platform_win.cpp;C:\Users\win\Documents\2d_mc\build\mc2d_client.dir\Debug\platform_win.obj
+C:\Users\win\Documents\2d_mc\src\common\blocks.cpp;C:\Users\win\Documents\2d_mc\build\mc2d_client.dir\Debug\blocks.obj
+C:\Users\win\Documents\2d_mc\src\common\world.cpp;C:\Users\win\Documents\2d_mc\build\mc2d_client.dir\Debug\world.obj
+C:\Users\win\Documents\2d_mc\src\common\physics.cpp;C:\Users\win\Documents\2d_mc\build\mc2d_client.dir\Debug\physics.obj
+C:\Users\win\Documents\2d_mc\src\common\net.cpp;C:\Users\win\Documents\2d_mc\build\mc2d_client.dir\Debug\net.obj

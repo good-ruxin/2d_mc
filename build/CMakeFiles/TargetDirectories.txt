@@ -1,4 +1,6 @@
-C:/Users/win/Documents/2d_mc/build/CMakeFiles/2d_mc.dir
+C:/Users/win/Documents/2d_mc/build/CMakeFiles/mc2d_server.dir
+C:/Users/win/Documents/2d_mc/build/CMakeFiles/mc2d_client.dir
+C:/Users/win/Documents/2d_mc/build/CMakeFiles/mc2d.dir
 C:/Users/win/Documents/2d_mc/build/CMakeFiles/PACKAGE.dir
 C:/Users/win/Documents/2d_mc/build/CMakeFiles/INSTALL.dir
 C:/Users/win/Documents/2d_mc/build/CMakeFiles/ALL_BUILD.dir

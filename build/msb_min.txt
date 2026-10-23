@@ -1,0 +1,4 @@
+适用于 .NET Framework MSBuild 版本 17.14.51+25f168cee
+
+  TRACKER : 错误 TRK0002: 未能执行命令: “"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\CL.exe" @C:\Users\win\AppData\Local\Temp\dsh-DUxTkk\MSBuildTemp\tmp555f0489f6ca459aa5a1fd9ca65b7ccc.rsp”。操作成功完成。
+C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(787,5): error MSB6006: “CL.exe”已退出，代码为 2。 [C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.vcxproj]
