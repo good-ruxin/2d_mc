@@ -1,0 +1,11 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/win/Documents/Projects/2d_mc/build/cmake_install.cmake",
+		"C:/Users/win/Documents/Projects/2d_mc/build/raylib_build/cmake_install.cmake",
+		"C:/Users/win/Documents/Projects/2d_mc/build/raylib_build/raylib/cmake_install.cmake",
+		"C:/Users/win/Documents/Projects/2d_mc/build/raylib_build/raylib/external/glfw/cmake_install.cmake",
+		"C:/Users/win/Documents/Projects/2d_mc/build/raylib_build/raylib/external/glfw/src/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

@@ -1,4 +1,4 @@
-prefix=C:/Program Files/2d_mc
+prefix=C:/Program Files (x86)/Minecraft2D
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

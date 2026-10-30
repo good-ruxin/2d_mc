@@ -35,7 +35,18 @@ enum BlockId : uint16_t {
     POPPY,
     DANDELION,
     OAK_SAPLING,
+    FURNACE,
+    CHEST,
     BLOCK_COUNT
+};
+
+// Which vanilla container GUI (assets/gui/container/*.png) a block opens.
+enum class ContainerGui : uint8_t {
+    None = 0,
+    Inventory,      // inventory.png
+    CraftingTable,  // crafting_table.png
+    Furnace,        // furnace.png
+    Chest,          // generic_54.png (54 slot double chest layout)
 };
 
 struct BlockDef {
@@ -54,6 +65,13 @@ struct BlockDef {
     const char* drop;      // empty string means no drop
     int dropMin;
     int dropMax;
+    ContainerGui gui = ContainerGui::None;
+};
+
+struct SmeltRecipe {
+    std::string input;
+    std::string output;
+    int count;
 };
 
 struct ItemDef {
@@ -84,6 +102,7 @@ struct Recipe {
     std::string output;
     int outputCount;
     std::vector<std::pair<std::string, int>> inputs;
+    int grid = 2;  // 2 = anywhere (player inventory), 3 = only at a crafting table
 };
 
 const BlockDef& blockDef(BlockId id);
@@ -91,6 +110,12 @@ const BlockDef& blockDef(int id);
 const ItemDef* itemDef(const std::string& id);
 const std::vector<ItemDef>& allItems();
 const std::vector<Recipe>& allRecipes();
+ContainerGui blockGui(BlockId id);
+
+const std::vector<SmeltRecipe>& allSmeltRecipes();
+const SmeltRecipe* smeltRecipe(const std::string& input);
+bool isFuel(const std::string& id);
+int fuelTicks(const std::string& id);
 
 bool isBlockItem(const std::string& item, BlockId* out = nullptr);
 bool isSolidBlock(BlockId id);

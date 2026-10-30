@@ -16,6 +16,7 @@
 #include <iostream>
 #include <map>
 #include <memory>
+#include <set>
 #include <mutex>
 #include <random>
 #include <sstream>
@@ -52,6 +53,45 @@ BOOL WINAPI consoleHandler(DWORD) {
 constexpr int INV_SIZE = 36;
 constexpr int HOTBAR_SIZE = 9;
 constexpr int SNAPSHOT_INTERVAL = 2;
+
+// Slot numbering shared with the client (and the assets/gui/container layouts).
+// player   0..35 : inventory slots 0..8 == hotbar, 9..35 == main inventory
+// craft    36..44: 3x3 grid (37,38,39,40,41,42,43,44 used by the 2x2 packet grid)
+// craft_out 45   : crafting output
+// furnace  46..48: input, fuel, output
+// chest    49..102: 54 chest slots
+constexpr int CRAFT_SLOT = 36;
+constexpr int CRAFT_GRID_SLOTS = 9;
+constexpr int CRAFT_OUT = 45;
+constexpr int FURNACE_INPUT = 46;
+constexpr int FURNACE_FUEL = 47;
+constexpr int FURNACE_OUTPUT = 48;
+constexpr int CHEST_SLOT_BASE = 49;
+constexpr int CHEST_SIZE = 54;
+constexpr int SMELT_TICKS = 200;
+
+struct ContainerPos {
+    int x = 0;
+    int y = 0;
+    std::string gui;  // "crafting_table", "furnace" or "chest"
+    bool operator<(const ContainerPos& other) const {
+        if (y != other.y) return y < other.y;
+        if (x != other.x) return x < other.x;
+        return gui < other.gui;
+    }
+    bool operator==(const ContainerPos& other) const {
+        return x == other.x && y == other.y && gui == other.gui;
+    }
+};
+
+struct FurnaceState {
+    ItemStack input;
+    ItemStack fuel;
+    ItemStack output;
+    int burnTime = 0;
+    int burnTotal = 0;
+    int cookTime = 0;
+};
 
 struct Entity {
     int id = 0;
@@ -100,6 +140,9 @@ struct Player {
     float spawnY = 0.0f;
     bool joined = false;
     int joinedTick = 0;
+    std::vector<ItemStack> craftGrid = std::vector<ItemStack>(CRAFT_GRID_SLOTS);
+    ContainerPos container;  // valid while the player has a container screen open
+    int containerTick = -1;
 };
 
 struct Client {
@@ -152,6 +195,7 @@ public:
             if (std::filesystem::exists(legacy)) playersPath_ = legacy;
         }
         loadPlayerData();
+        loadContainers();
         logLine("[Server] Minecraft 2D 专用服务器已启动");
         logLine("[Server] 地址: 0.0.0.0:" + std::to_string(port_) +
                 "  世界: " + std::to_string(world_.width()) + "x" + std::to_string(world_.height()));
@@ -176,6 +220,7 @@ public:
             std::this_thread::sleep_until(nextTick);
         }
         saveWorld();
+        saveContainers();
         savePlayerData();
         logLine("[Server] 正在关闭...");
     }
@@ -221,6 +266,13 @@ private:
     uint64_t lastSaveTick_ = 0;
     bool shutdownDone_ = false;
     bool worldChangeDirty_ = false;
+    std::map<ContainerPos, FurnaceState> furnaces_;
+    std::map<ContainerPos, std::vector<ItemStack>> chests_;
+    bool containersDirty_ = false;
+    bool containersSaved_ = true;
+    std::vector<ItemStack> furnaceVector;
+    std::map<ContainerPos, std::set<std::string>> chestViewers_;
+    bool containerSentSerial_ = false;
 
     void pollConsole() {
         // Non-blocking console input. This also works when the server was
@@ -295,6 +347,7 @@ private:
             if (players_.count(id)) {
                 Player& player = players_[id];
                 if (player.joined) {
+                    closeInventory(player);
                     savePlayerData();
                     broadcastChat("系统", player.name + " 离开了游戏");
                     logLine("[Player] " + player.name + " 离开了游戏");
@@ -360,6 +413,27 @@ private:
                                 payload.value("shift", false));
             } else if (type == "close_inventory") {
                 closeInventory(player);
+            } else if (type == "open_container") {
+                int x = payload.value("x", -1);
+                int y = payload.value("y", -1);
+                std::string gui = payload.value("gui", "");
+                openContainer(player, gui, x, y);
+            } else if (type == "swap_hotbar") {
+                handleSwapHotbar(player, payload.value("slot", -1), payload.value("hotbar", -1));
+            } else if (type == "screenshot_gui") {
+                // Debug helper: place a furnace/chest next to the player.
+                std::string gui = payload.value("gui", "");
+                if (gui != "furnace" && gui != "chest") continue;
+                int x = payload.value("x", -1);
+                int y = payload.value("y", -1);
+                if (!world_.inBounds(x, y)) continue;
+                BlockId block = gui == "furnace" ? FURNACE : CHEST;
+                world_.setFg(x, y, block);
+                if (gui == "furnace") furnaces_[ContainerPos{x, y, "furnace"}] = FurnaceState{};
+                else chests_[ContainerPos{x, y, "chest"}] = std::vector<ItemStack>(CHEST_SIZE);
+                containersDirty_ = true;
+                worldChangeDirty_ = true;
+                broadcastBlock(x, y);
             } else if (type == "craft") {
                 handleCraft(player, payload.value("recipe", ""));
             } else if (type == "drop") {
@@ -618,11 +692,88 @@ private:
 
         updateEntities();
         maybeSpawnMonsters();
+        updateFurnaces();
 
         if (tick_ % SNAPSHOT_INTERVAL == 0) broadcastSnapshot();
+        tickOpenContainers();
+        if (containersDirty_) {
+            containersDirty_ = false;
+            containersSaved_ = false;
+        }
         if (tick_ % 600 == 0) {
             saveWorld();
+            if (containersDirtySaved()) saveContainers();
             savePlayerData();
+        }
+    }
+
+    bool containersDirtySaved() const { return !containersSaved_; }
+
+    std::vector<ItemStack>& containerSlots(Player& player, int slot, bool* ok) {
+        *ok = slot >= 0 && slot < INV_SIZE;
+        return player.inv;
+    }
+
+    static std::vector<ItemStack> makeFurnaceVector(const FurnaceState& furnace) {
+        std::vector<ItemStack> slots(3);
+        slots[0] = furnace.input;
+        slots[1] = furnace.fuel;
+        slots[2] = furnace.output;
+        return slots;
+    }
+
+    void storeFurnaceSlots(const ContainerPos& pos) {
+        auto it = furnaces_.find(pos);
+        if (it == furnaces_.end() || furnaceVector.size() < 3) return;
+        it->second.input = furnaceVector[0];
+        it->second.fuel = furnaceVector[1];
+        it->second.output = furnaceVector[2];
+        if (it->second.input.empty()) it->second.cookTime = 0;
+        containersDirty_ = true;
+    }
+
+    // Called after a slot interaction to flush temporary copies back.
+    void commitContainer(Player& player) {
+        if (player.container.gui == "furnace") storeFurnaceSlots(player.container);
+        if (player.container.gui == "chest" || player.container.gui == "furnace") containersDirty_ = true;
+    }
+
+    void updateFurnaces() {
+        containersDirty_ = false;
+        for (auto& [pos, furnace] : furnaces_) {
+            (void)pos;
+            const SmeltRecipe* recipe = smeltRecipe(furnace.input.id);
+            const int limit = (recipe && itemDef(recipe->output)) ? itemDef(recipe->output)->maxStack : 64;
+            bool canOutput = recipe && !furnace.input.empty() &&
+                             (furnace.output.empty() ||
+                              (furnace.output.id == recipe->output && furnace.output.count + recipe->count <= limit));
+            if (furnace.burnTime > 0) --furnace.burnTime;
+            if (furnace.burnTime <= 0 && canOutput && !furnace.fuel.empty()) {
+                int ticks = fuelTicks(furnace.fuel.id);
+                if (ticks > 0) {
+                    bool isBucket = furnace.fuel.id == "lava_bucket";
+                    furnace.burnTime = ticks;
+                    furnace.burnTotal = ticks;
+                    --furnace.fuel.count;
+                    if (furnace.fuel.count <= 0) {
+                        furnace.fuel.clear();
+                        if (isBucket) furnace.fuel = makeStack("bucket", 1);
+                    }
+                    containersDirty_ = true;
+                }
+            }
+            if (furnace.burnTime > 0 && canOutput) {
+                if (++furnace.cookTime >= SMELT_TICKS) {
+                    furnace.cookTime = 0;
+                    furnace.output = makeStack(recipe->output, furnace.output.count + recipe->count);
+                    --furnace.input.count;
+                    if (furnace.input.count <= 0) furnace.input.clear();
+                    containersDirty_ = true;
+                }
+            } else {
+                if (furnace.cookTime != 0) containersDirty_ = true;
+                furnace.cookTime = 0;
+            }
         }
     }
 
@@ -961,6 +1112,7 @@ private:
         if (block == BEDROCK && !player.creative) return;
         const BlockDef& def = blockDef(block);
         if (def.hardness < 0 && !player.creative) return;
+        dropContainerContents(block, x, y);
         world_.setFg(x, y, AIR);
         worldChangeDirty_ = true;
         broadcastBlock(x, y);
@@ -975,6 +1127,44 @@ private:
                 spawnItem(def.drop, count, static_cast<float>(x) + 0.5f, static_cast<float>(y) + 0.5f,
                           (static_cast<float>(rng_() % 100) / 100.0f - 0.5f) * 3.0f,
                           -2.0f - static_cast<float>(rng_() % 100) / 50.0f);
+            }
+        }
+    }
+
+    // Breaking a furnace or chest spills its contents and closes any open view.
+    void dropContainerContents(BlockId block, int x, int y) {
+        auto spill = [&](const std::vector<ItemStack>& stacks) {
+            for (const auto& stack : stacks) {
+                if (stack.empty()) continue;
+                spawnItem(stack.id, stack.count, static_cast<float>(x) + 0.5f, static_cast<float>(y) + 0.5f,
+                          (static_cast<float>(rng_() % 100) / 100.0f - 0.5f) * 3.0f, -2.0f);
+            }
+        };
+        bool changed = false;
+        if (block == FURNACE) {
+            ContainerPos pos{x, y, "furnace"};
+            auto it = furnaces_.find(pos);
+            if (it != furnaces_.end()) {
+                spill(makeFurnaceVector(it->second));
+                furnaces_.erase(it);
+                changed = true;
+            }
+        } else if (block == CHEST) {
+            ContainerPos pos{x, y, "chest"};
+            auto it = chests_.find(pos);
+            if (it != chests_.end()) {
+                spill(it->second);
+                chests_.erase(it);
+                changed = true;
+            }
+        }
+        if (!changed) return;
+        containersDirty_ = true;
+        for (auto& [id, player] : players_) {
+            (void)id;
+            if (!player.container.gui.empty() && player.container.x == x && player.container.y == y &&
+                player.container.gui != "crafting_table") {
+                closeInventory(player);
             }
         }
     }
@@ -1021,6 +1211,11 @@ private:
         }
         world_.setFg(x, y, block);
         worldChangeDirty_ = true;
+        if (block == FURNACE || block == CHEST) {
+            if (block == FURNACE) furnaces_[ContainerPos{x, y, "furnace"}] = FurnaceState{};
+            else chests_[ContainerPos{x, y, "chest"}] = std::vector<ItemStack>(CHEST_SIZE);
+            containersDirty_ = true;
+        }
         broadcastBlock(x, y);
         json event = {{"type", "event"}, {"kind", "block_place"}, {"x", x}, {"y", y}, {"block", block}};
         broadcast(event);
@@ -1066,39 +1261,339 @@ private:
         }
     }
 
-    void handleSlotClick(Player& player, int slot, int button, bool shift) {
-        if (player.dead || slot < 0 || slot >= INV_SIZE) return;
-        ItemStack& target = player.inv[slot];
-        if (shift) {
-            if (target.empty()) return;
-            const int begin = slot < HOTBAR_SIZE ? HOTBAR_SIZE : 0;
-            const int end = slot < HOTBAR_SIZE ? INV_SIZE : HOTBAR_SIZE;
-            int count = target.count;
-            std::string id = target.id;
-            const int limit = itemDef(id) ? itemDef(id)->maxStack : 64;
-            for (int i = begin; i < end && count > 0; ++i) {
-                ItemStack& dst = player.inv[i];
-                if (!dst.empty() && dst.id == id && dst.count < limit) {
-                    int moved = std::min(count, limit - dst.count);
-                    dst.count += moved;
-                    count -= moved;
-                }
+    // --- Container slots -------------------------------------------------
+    // The slot map is sent to the client with every `container` message so the
+    // renderer can place items over the vanilla gui/container/*.png layouts.
+
+    void openContainer(Player& player, const std::string& gui, int x, int y) {
+        if (player.dead) return;
+        if (gui != "crafting_table" && gui != "furnace" && gui != "chest") return;
+        if (gui == "crafting_table") {
+            if (player.container.gui != gui) {
+                player.container = ContainerPos{0, 0, gui};
+                player.containerTick = static_cast<int>(tick_);
             }
-            for (int i = begin; i < end && count > 0; ++i) {
-                ItemStack& dst = player.inv[i];
-                if (dst.empty()) {
-                    int moved = std::min(count, limit);
-                    dst.id = id;
-                    dst.count = moved;
-                    count -= moved;
-                }
-            }
-            if (count <= 0) target.clear();
-            else target.count = count;
-            sendInventory(player);
+            sendContainer(player);
             return;
         }
-        if (button == 0) {
+        // Block containers must still exist and the player must stand next to them.
+        if (world_.fg(x, y) != (gui == "furnace" ? FURNACE : CHEST)) return;
+        if (!reachable(player, x, y)) return;
+        ContainerPos pos{x, y, gui};
+        if (gui == "furnace" && !furnaces_.count(pos)) {
+            FurnaceState furnace;
+            furnaces_[pos] = furnace;
+            containersDirty_ = true;
+        }
+        if (gui == "chest" && !chests_.count(pos)) {
+            chests_[pos] = std::vector<ItemStack>(CHEST_SIZE);
+            containersDirty_ = true;
+        }
+        player.container = pos;
+        player.containerTick = static_cast<int>(tick_);
+        sendContainer(player);
+    }
+
+    bool reachable(const Player& player, int x, int y) const {
+        float dx = (static_cast<float>(x) + 0.5f) - player.body.x;
+        float dy = (static_cast<float>(y) + 0.5f) - player.body.centerY();
+        return dx * dx + dy * dy <= 7.0f * 7.0f;
+    }
+
+    bool containerStillValid(const Player& player) const {
+        if (player.container.gui.empty()) return false;
+        if (player.container.gui == "crafting_table") return true;
+        BlockId block = player.container.gui == "furnace" ? FURNACE : CHEST;
+        return world_.fg(player.container.x, player.container.y) == block &&
+               reachable(player, player.container.x, player.container.y);
+    }
+
+    void returnGridToInventory(Player& player) {
+        for (auto& stack : player.craftGrid) {
+            if (stack.empty()) continue;
+            int remaining = addItem(player.inv, stack.id, stack.count);
+            if (remaining > 0) {
+                spawnItem(stack.id, remaining, player.body.x, player.body.y - 1.0f, 0.0f, -2.0f);
+            }
+            stack.clear();
+        }
+    }
+
+    void closeInventory(Player& player) {
+        if (!player.cursor.empty()) {
+            int remaining = addItem(player.inv, player.cursor.id, player.cursor.count);
+            if (remaining > 0) {
+                spawnItem(player.cursor.id, remaining, player.body.x, player.body.y - 1.0f, 0.0f, -2.0f);
+            }
+            player.cursor.clear();
+        }
+        if (player.container.gui == "crafting_table") returnGridToInventory(player);
+        if (player.container.gui == "furnace") storeFurnaceSlots(player.container);
+        player.container = ContainerPos{};
+        player.containerTick = -1;
+        sendInventory(player);
+        json closed = {{"type", "container"}, {"gui", ""}};
+        sendTo(player.id, closed);
+    }
+
+    json containerJson(Player& player) {
+        json message = {
+            {"type", "container"},
+            {"gui", player.container.gui},
+            {"x", player.container.x},
+            {"y", player.container.y},
+            {"cursor", stackJson(player.cursor)},
+            {"selected", player.selected},
+            {"grid", gridJson(player.craftGrid)},
+            {"viewers", chestViewers_.count(player.container) ? static_cast<int>(chestViewers_[player.container].size()) : 0},
+            {"tick", tick_},
+        };
+        json slots = json::array();
+        for (const auto& stack : player.inv) slots.push_back(stackJson(stack));
+        message["slots"] = slots;
+        if (player.container.gui == "crafting_table") {
+            json grid = json::array();
+            for (const auto& stack : player.craftGrid) grid.push_back(stackJson(stack));
+            message["crafting"] = grid;
+        } else if (player.container.gui == "furnace") {
+            auto it = furnaces_.find(player.container);
+            if (it != furnaces_.end()) {
+                const FurnaceState& furnace = it->second;
+                message["furnace"] = json{
+                    {"input", stackJson(furnace.input)},
+                    {"fuel", stackJson(furnace.fuel)},
+                    {"output", stackJson(furnace.output)},
+                    {"burnTime", furnace.burnTime},
+                    {"burnTotal", furnace.burnTotal},
+                    {"cookTime", furnace.cookTime},
+                    {"cookTotal", SMELT_TICKS},
+                };
+            }
+        } else if (player.container.gui == "chest") {
+            auto it = chests_.find(player.container);
+            if (it != chests_.end()) {
+                json chest = json::array();
+                for (int i = 0; i < CHEST_SIZE; ++i) {
+                    chest.push_back(i < static_cast<int>(it->second.size()) ? stackJson(it->second[i])
+                                                                            : json(nullptr));
+                }
+                message["chest"] = chest;
+            }
+        }
+        return message;
+    }
+
+    void sendContainer(Player& player) { sendTo(player.id, containerJson(player)); }
+
+    // Pushes live updates for open crafting / furnace / chest screens and keeps
+    // the "who is looking into this chest" list in sync.
+    void tickOpenContainers() {
+        if (tick_ % 5 != 0) return;
+        chestViewers_.clear();
+        for (auto& [id, player] : players_) {
+            (void)id;
+            if (player.container.gui == "chest") chestViewers_[player.container].insert(player.name);
+        }
+        for (auto& [id, player] : players_) {
+            (void)id;
+            if (player.container.gui.empty()) continue;
+            sendContainer(player);
+        }
+    }
+
+    std::string recipeOutputForGrid(const std::vector<ItemStack>& grid, int gridSize) const {
+        // Every item in the grid must be an ingredient, and the counts must
+        // cover the recipe exactly (the vanilla "matcher" simplified).
+        if (gridSize <= 0) return "";
+        for (const auto& recipe : allRecipes()) {
+            if (recipe.grid > gridSize) continue;
+            std::map<std::string, int> need;
+            for (const auto& [item, count] : recipe.inputs) need[item] += count;
+            std::map<std::string, int> have;
+            bool valid = true;
+            for (const auto& stack : grid) {
+                if (stack.empty()) continue;
+                if (!need.count(stack.id)) {
+                    valid = false;
+                    break;
+                }
+                have[stack.id] += stack.count;
+                if (have[stack.id] > need[stack.id]) {
+                    valid = false;
+                    break;
+                }
+            }
+            if (!valid || have.empty()) continue;
+            if (need == have) return recipe.id;
+        }
+        return "";
+    }
+
+    void consumeGridForCraft(Player& player, int gridSize, const std::string& recipeId) {
+        for (const auto& recipe : allRecipes()) {
+            if (recipe.id != recipeId) continue;
+            std::map<std::string, int> need;
+            for (const auto& [item, count] : recipe.inputs) need[item] += count;
+            for (auto& stack : player.craftGrid) {
+                if (stack.empty()) continue;
+                auto it = need.find(stack.id);
+                if (it == need.end()) continue;
+                int take = std::min(it->second, stack.count);
+                stack.count -= take;
+                it->second -= take;
+                if (stack.count <= 0) stack.clear();
+            }
+            (void)gridSize;
+            return;
+        }
+    }
+
+    void craftFromGrid(Player& player, int gridSize, bool all) {
+        std::vector<ItemStack> grid;
+        for (int i = 0; i < gridSize && i < CRAFT_GRID_SLOTS; ++i) grid.push_back(player.craftGrid[i]);
+        std::string recipeId = recipeOutputForGrid(grid, gridSize);
+        if (recipeId.empty()) return;
+        const Recipe* recipe = nullptr;
+        for (const auto& candidate : allRecipes()) {
+            if (candidate.id == recipeId) recipe = &candidate;
+        }
+        if (!recipe) return;
+        const int limit = itemDef(recipe->output) ? itemDef(recipe->output)->maxStack : 64;
+        // Like vanilla, shift-clicking the result crafts as many as fit.
+        if (!player.cursor.empty() && player.cursor.id != recipe->output) return;
+        const int rounds = all ? 64 : 1;
+        for (int round = 0; round < rounds; ++round) {
+            if (!player.cursor.empty() && player.cursor.count + recipe->outputCount > limit) break;
+            if (round > 0) {
+                std::vector<ItemStack> next;
+                for (int i = 0; i < gridSize && i < CRAFT_GRID_SLOTS; ++i) next.push_back(player.craftGrid[i]);
+                if (recipeOutputForGrid(next, gridSize) != recipeId) break;
+            }
+            if (player.cursor.empty()) player.cursor = makeStack(recipe->output, recipe->outputCount);
+            else player.cursor.count += recipe->outputCount;
+            consumeGridForCraft(player, gridSize, recipeId);
+        }
+    }
+
+    int gridLimit(Player& player) const {
+        return player.container.gui == "crafting_table" ? 3 : 2;
+    }
+
+    void handleSlotClick(Player& player, int slot, int button, bool shift) {
+        if (player.dead) return;
+        if (!player.container.gui.empty() && !containerStillValid(player)) {
+            closeInventory(player);
+            return;
+        }
+        const bool tableOpen = player.container.gui == "crafting_table";
+        const int gridSize = gridLimit(player);
+        // Slot 45 (CRAFT_OUT) belongs to the crafting output.
+        if (slot == CRAFT_OUT) {
+            craftFromGrid(player, gridSize, shift);
+            if (tableOpen) sendInventory(player);
+            sendContainer(player);
+            return;
+        }
+        std::vector<ItemStack>* storage = nullptr;
+        int index = -1;
+        if (slot >= 0 && slot < INV_SIZE) {
+            storage = &player.inv;
+            index = slot;
+        } else if (slot >= CRAFT_SLOT && slot < CRAFT_SLOT + gridSize * gridSize) {
+            storage = &player.craftGrid;
+            index = slot - CRAFT_SLOT;
+        } else if (player.container.gui == "furnace") {
+            if (slot == FURNACE_INPUT) index = 0;
+            else if (slot == FURNACE_FUEL) index = 1;
+            else if (slot == FURNACE_OUTPUT) index = 2;
+            if (index >= 0) {
+                auto it = furnaces_.find(player.container);
+                if (it == furnaces_.end()) {
+                    closeInventory(player);
+                    return;
+                }
+                furnaceVector = makeFurnaceVector(it->second);
+                storage = &furnaceVector;
+            }
+        } else if (player.container.gui == "chest") {
+            auto it = chests_.find(player.container);
+            if (it == chests_.end()) {
+                closeInventory(player);
+                return;
+            }
+            if (slot >= CHEST_SLOT_BASE && slot < CHEST_SLOT_BASE + CHEST_SIZE) {
+                storage = &it->second;
+                index = slot - CHEST_SLOT_BASE;
+            }
+        }
+        if (!storage || index < 0 || index >= static_cast<int>(storage->size())) return;
+        ItemStack& target = (*storage)[index];
+        // The furnace result can only be taken out by hand.
+        if (player.container.gui == "furnace" && slot == FURNACE_OUTPUT && !player.cursor.empty()) return;
+
+        auto moveInto = [](std::vector<ItemStack>& dst, int begin, int end, ItemStack& src) {
+            int count = src.count;
+            const int limit = itemDef(src.id) ? itemDef(src.id)->maxStack : 64;
+            for (int i = begin; i < end && count > 0; ++i) {
+                ItemStack& d = dst[i];
+                if (!d.empty() && d.id == src.id && d.count < limit) {
+                    int moved = std::min(count, limit - d.count);
+                    d.count += moved;
+                    count -= moved;
+                }
+            }
+            for (int i = begin; i < end && count > 0; ++i) {
+                ItemStack& d = dst[i];
+                if (d.empty()) {
+                    int moved = std::min(count, limit);
+                    d.id = src.id;
+                    d.count = moved;
+                    count -= moved;
+                }
+            }
+            src.count = count;
+            if (src.count <= 0) src.clear();
+        };
+
+        if (shift) {
+            if (target.empty()) return;
+            if (slot < INV_SIZE) {
+                if (tableOpen) moveInto(player.craftGrid, 0, CRAFT_GRID_SLOTS, target);
+                else if (player.container.gui == "furnace") {
+                    auto it = furnaces_.find(player.container);
+                    if (it == furnaces_.end()) return;
+                    FurnaceState& furnace = it->second;
+                    if (smeltRecipe(target.id)) {
+                        ItemStack& dst = furnace.input;
+                        const int limit = itemDef(target.id)->maxStack;
+                        int moved = dst.empty() ? std::min(target.count, limit) : 0;
+                        if (moved > 0) {
+                            dst = makeStack(target.id, moved);
+                            target.count -= moved;
+                            if (target.count <= 0) target.clear();
+                        }
+                    } else if (isFuel(target.id)) {
+                        ItemStack& dst = furnace.fuel;
+                        const int limit = itemDef(target.id)->maxStack;
+                        int moved = dst.empty() ? std::min(target.count, limit) : 0;
+                        if (moved > 0) {
+                            dst = makeStack(target.id, moved);
+                            target.count -= moved;
+                            if (target.count <= 0) target.clear();
+                        }
+                    }
+                } else if (player.container.gui == "chest") {
+                    auto it = chests_.find(player.container);
+                    if (it != chests_.end()) moveInto(it->second, 0, CHEST_SIZE, target);
+                } else {
+                    moveInto(player.inv, slot < HOTBAR_SIZE ? HOTBAR_SIZE : 0, slot < HOTBAR_SIZE ? INV_SIZE : HOTBAR_SIZE,
+                             target);
+                }
+            } else {
+                // From the container back into the player inventory.
+                moveInto(player.inv, 0, INV_SIZE, target);
+            }
+        } else if (button == 0) {
             if (player.cursor.empty()) {
                 player.cursor = target;
                 target.clear();
@@ -1122,39 +1617,98 @@ private:
                 player.cursor.count = take;
                 target.count -= take;
                 if (target.count <= 0) target.clear();
-            } else {
-                if (target.empty()) {
-                    target.id = player.cursor.id;
-                    target.count = 1;
+            } else if (target.empty()) {
+                target.id = player.cursor.id;
+                target.count = 1;
+                if (--player.cursor.count <= 0) player.cursor.clear();
+            } else if (target.id == player.cursor.id) {
+                const int limit = itemDef(target.id) ? itemDef(target.id)->maxStack : 64;
+                if (target.count < limit) {
+                    ++target.count;
                     if (--player.cursor.count <= 0) player.cursor.clear();
-                } else if (target.id == player.cursor.id) {
-                    const int limit = itemDef(target.id) ? itemDef(target.id)->maxStack : 64;
-                    if (target.count < limit) {
-                        ++target.count;
-                        if (--player.cursor.count <= 0) player.cursor.clear();
-                    }
                 }
             }
         }
+        commitContainer(player);
         sendInventory(player);
+        sendContainer(player);
     }
 
-    void closeInventory(Player& player) {
-        if (!player.cursor.empty()) {
-            int remaining = addItem(player.inv, player.cursor.id, player.cursor.count);
-            if (remaining > 0) {
-                spawnItem(player.cursor.id, remaining, player.body.x, player.body.y - 1.0f,
-                          0.0f, -2.0f);
-            }
-            player.cursor.clear();
+    // Number keys over a slot swap it with that hotbar slot (vanilla behaviour),
+    // or move a single item when a stack is held.
+    void handleSwapHotbar(Player& player, int slot, int hotbar) {
+        if (player.dead || hotbar < 0 || hotbar >= HOTBAR_SIZE) return;
+        if (!player.container.gui.empty() && !containerStillValid(player)) {
+            closeInventory(player);
+            return;
         }
+        std::vector<ItemStack>* storage = nullptr;
+        int index = -1;
+        if (slot >= 0 && slot < INV_SIZE) {
+            storage = &player.inv;
+            index = slot;
+        } else if (slot >= CRAFT_SLOT && slot < CRAFT_SLOT + CRAFT_GRID_SLOTS) {
+            storage = &player.craftGrid;
+            index = slot - CRAFT_SLOT;
+        } else if (player.container.gui == "furnace") {
+            auto it = furnaces_.find(player.container);
+            if (it == furnaces_.end()) return;
+            if (slot == FURNACE_INPUT) index = 0;
+            else if (slot == FURNACE_FUEL) index = 1;
+            else return;  // result slot cannot be moved into the hotbar
+            furnaceVector = makeFurnaceVector(it->second);
+            storage = &furnaceVector;
+        } else if (player.container.gui == "chest") {
+            auto it = chests_.find(player.container);
+            if (it == chests_.end()) return;
+            if (slot >= CHEST_SLOT_BASE && slot < CHEST_SLOT_BASE + CHEST_SIZE) {
+                storage = &it->second;
+                index = slot - CHEST_SLOT_BASE;
+            }
+        }
+        if (!storage || index < 0 || index >= static_cast<int>(storage->size())) return;
+        ItemStack& target = (*storage)[index];
+        ItemStack& hot = player.inv[hotbar];
+        if (!player.cursor.empty()) {
+            // Place one item from the held stack into the slot.
+            if (target.empty()) {
+                target.id = player.cursor.id;
+                target.count = 1;
+            } else if (target.id == player.cursor.id) {
+                const int limit = itemDef(target.id) ? itemDef(target.id)->maxStack : 64;
+                if (target.count >= limit) return;
+                ++target.count;
+            } else {
+                return;
+            }
+            if (--player.cursor.count <= 0) player.cursor.clear();
+        } else {
+            std::swap(target, hot);
+        }
+        commitContainer(player);
         sendInventory(player);
+        sendContainer(player);
     }
 
     void handleCraft(Player& player, const std::string& recipeId) {
         if (player.dead) return;
+        if (player.container.gui == "crafting_table") {
+            // With the crafting table open the grid is authoritative; only
+            // recipes that fit the 2x2 inventory grid may be crafted directly.
+            std::vector<ItemStack> grid(player.craftGrid.begin(), player.craftGrid.begin() + 4);
+            if (!recipeOutputForGrid(grid, 2).empty() || grid.empty()) {
+                craftFromGrid(player, 2, false);
+                sendInventory(player);
+                sendContainer(player);
+                return;
+            }
+        }
         for (const auto& recipe : allRecipes()) {
             if (recipe.id != recipeId) continue;
+            if (recipe.grid > 2) {
+                sendSystem(player, "该配方需要工作台");
+                return;
+            }
             for (const auto& [item, count] : recipe.inputs) {
                 if (countItem(player.inv, item) < count) {
                     sendSystem(player, "材料不足");
@@ -1361,6 +1915,7 @@ private:
             sendSystem(player, "世界种子: " + std::to_string(world_.seed()));
         } else if (command == "save") {
             saveWorld(true);
+            saveContainers();
             sendSystem(player, "世界已保存");
         } else if (command == "list") {
             std::string list;
@@ -1398,6 +1953,7 @@ private:
             g_running = false;
         } else if (command == "save") {
             saveWorld(true);
+            saveContainers();
         } else if (command == "help") {
             logLine("控制台指令: stop | save | list | time set day|night | say <消息> | seed");
         } else if (command == "list") {
@@ -1426,6 +1982,103 @@ private:
         }
     }
 
+    std::filesystem::path containersPath() const {
+        return worldPath_.parent_path() / (worldPath_.stem().string() + ".containers.json");
+    }
+
+    void loadContainers() {
+        std::ifstream in(containersPath());
+        if (!in) return;
+        json data;
+        try {
+            in >> data;
+        } catch (...) {
+            logLine("[World] 容器数据损坏，已忽略");
+            return;
+        }
+        if (!data.is_object()) return;
+        int furnaces = 0;
+        int chests = 0;
+        if (data.contains("furnaces") && data["furnaces"].is_array()) {
+            for (const auto& entry : data["furnaces"]) {
+                try {
+                    ContainerPos pos{entry.value("x", -1), entry.value("y", -1), "furnace"};
+                    if (pos.x < 0 || pos.y < 0) continue;
+                    FurnaceState furnace;
+                    furnace.input = stackFromJson(entry.value("input", json()));
+                    furnace.fuel = stackFromJson(entry.value("fuel", json()));
+                    furnace.output = stackFromJson(entry.value("output", json()));
+                    furnace.burnTime = entry.value("burnTime", 0);
+                    furnace.burnTotal = entry.value("burnTotal", 0);
+                    furnace.cookTime = entry.value("cookTime", 0);
+                    furnaces_[pos] = furnace;
+                    ++furnaces;
+                } catch (...) {
+                }
+            }
+        }
+        if (data.contains("chests") && data["chests"].is_array()) {
+            for (const auto& entry : data["chests"]) {
+                try {
+                    ContainerPos pos{entry.value("x", -1), entry.value("y", -1), "chest"};
+                    if (pos.x < 0 || pos.y < 0) continue;
+                    std::vector<ItemStack> slots(CHEST_SIZE);
+                    const json& items = entry.contains("items") ? entry["items"] : json::array();
+                    int index = 0;
+                    for (const auto& item : items) {
+                        if (index >= CHEST_SIZE) break;
+                        slots[index] = stackFromJson(item);
+                        ++index;
+                    }
+                    chests_[pos] = slots;
+                    ++chests;
+                } catch (...) {
+                }
+            }
+        }
+        containersSaved_ = true;
+        if (furnaces + chests > 0) {
+            logLine("[World] 已载入 " + std::to_string(furnaces) + " 个熔炉、" + std::to_string(chests) + " 个箱子");
+        }
+    }
+
+    void saveContainers() {
+        json furnaces = json::array();
+        for (const auto& [pos, furnace] : furnaces_) {
+            if (world_.fg(pos.x, pos.y) != FURNACE) continue;
+            furnaces.push_back(json{
+                {"x", pos.x},
+                {"y", pos.y},
+                {"input", stackJson(furnace.input)},
+                {"fuel", stackJson(furnace.fuel)},
+                {"output", stackJson(furnace.output)},
+                {"burnTime", furnace.burnTime},
+                {"burnTotal", furnace.burnTotal},
+                {"cookTime", furnace.cookTime},
+            });
+        }
+        json chests = json::array();
+        for (const auto& [pos, slots] : chests_) {
+            if (world_.fg(pos.x, pos.y) != CHEST) continue;
+            json items = json::array();
+            for (const auto& stack : slots) items.push_back(stackJson(stack));
+            chests.push_back(json{{"x", pos.x}, {"y", pos.y}, {"items", items}});
+        }
+        json root = {{"version", 1}, {"furnaces", furnaces}, {"chests", chests}};
+        std::error_code ec;
+        std::filesystem::create_directories(worldPath_.parent_path(), ec);
+        std::filesystem::path temp = containersPath();
+        temp += ".tmp";
+        {
+            std::ofstream out(temp, std::ios::trunc);
+            if (!out) return;
+            out << root.dump(1);
+        }
+        std::filesystem::remove(containersPath(), ec);
+        std::filesystem::rename(temp, containersPath(), ec);
+        containersSaved_ = true;
+    }
+
     void saveWorld(bool announce = false) {
         std::error_code ec;
         std::filesystem::create_directories(worldPath_.parent_path(), ec);
@@ -1452,6 +2105,22 @@ private:
     json stackJson(const ItemStack& stack) const {
         if (stack.empty()) return nullptr;
         return json{{"id", stack.id}, {"count", stack.count}};
+    }
+
+    static ItemStack stackFromJson(const json& value) {
+        if (!value.is_object()) return ItemStack{};
+        std::string id = value.value("id", "");
+        int count = std::clamp(value.value("count", 0), 0, 6400);
+        if (!itemDef(id) || count <= 0) return ItemStack{};
+        return makeStack(id, count);
+    }
+
+    static json gridJson(const std::vector<ItemStack>& stacks) {
+        json result = json::array();
+        for (const auto& stack : stacks) {
+            result.push_back(stack.empty() ? json(nullptr) : json{{"id", stack.id}, {"count", stack.count}});
+        }
+        return result;
     }
 
     void sendInventory(Player& player) {

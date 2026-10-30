@@ -102,12 +102,12 @@
       <SupportJustMyCode></SupportJustMyCode>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NOMINMAX;WIN32_LEAN_AND_MEAN;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;NOMINMAX;WIN32_LEAN_AND_MEAN;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\src;C:\Users\win\Documents\2d_mc\raylib\src;C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\include;C:\Users\win\Documents\2d_mc\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -149,14 +149,14 @@
       <SupportJustMyCode></SupportJustMyCode>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NOMINMAX;WIN32_LEAN_AND_MEAN;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NOMINMAX;WIN32_LEAN_AND_MEAN;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\src;C:\Users\win\Documents\2d_mc\raylib\src;C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\include;C:\Users\win\Documents\2d_mc\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -198,14 +198,14 @@
       <SupportJustMyCode></SupportJustMyCode>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NOMINMAX;WIN32_LEAN_AND_MEAN;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NOMINMAX;WIN32_LEAN_AND_MEAN;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\src;C:\Users\win\Documents\2d_mc\raylib\src;C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\include;C:\Users\win\Documents\2d_mc\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -248,12 +248,12 @@
       <SupportJustMyCode></SupportJustMyCode>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NOMINMAX;WIN32_LEAN_AND_MEAN;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NOMINMAX;WIN32_LEAN_AND_MEAN;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\src;C:\Users\win\Documents\2d_mc\raylib\src;C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\include;C:\Users\win\Documents\2d_mc\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -338,7 +338,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClCompile Include="C:\Users\win\Documents\2d_mc\src\client\main.cpp" />
     <ClCompile Include="C:\Users\win\Documents\2d_mc\src\client\assets.cpp" />
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\src\client\platform_win.cpp" />
+    <ClCompile Include="C:\Users\win\Documents\2d_mc\src\client\platform_win32.cpp" />
     <ClCompile Include="C:\Users\win\Documents\2d_mc\src\common\blocks.cpp" />
     <ClCompile Include="C:\Users\win\Documents\2d_mc\src\common\world.cpp" />
     <ClCompile Include="C:\Users\win\Documents\2d_mc\src\common\physics.cpp" />

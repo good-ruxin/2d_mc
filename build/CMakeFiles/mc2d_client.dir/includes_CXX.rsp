@@ -1,0 +1,1 @@
+-IC:/Users/win/Documents/Projects/2d_mc/src -IC:/Users/win/Documents/Projects/2d_mc/raylib/src -IC:/Users/win/Documents/Projects/2d_mc/raylib/src/external/glfw/include -isystem "C:/Users/win/Documents/Projects/2d_mc/vcpkg_installed/x64-windows/include"

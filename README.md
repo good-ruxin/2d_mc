@@ -22,9 +22,6 @@
 
 也可以手动开启专用服务器并在游戏里连接：
 
-1. 双击 **`start_server.bat`**（默认端口 `25565`）。
-2. 双击 **`start_game.bat`**，进入“多人游戏”，地址填写 `127.0.0.1:25565`，或直接使用“单人游戏”连接到已经运行的服务器。
-
 服务器控制台支持输入 `help`、`save`、`list`、`time set day|night`、`say`、`stop`。
 
 ### 命令行
@@ -46,7 +43,6 @@ bin\mc2d_server.exe --port 25565 --fresh --seed 12345
 
 需要 Visual Studio 2022（含 C++ 桌面开发）、CMake 与 Windows SDK。raylib 已随仓库提供，nlohmann/json 从 `vcpkg_installed` 使用。
 
-最简单的方式是双击 **`build.bat`**。或者：
 
 ```bat
 cmake -S . -B build -G "Visual Studio 17 2022" -A x64
@@ -105,9 +101,6 @@ src/
   client/   raylib 渲染、界面、预测与网络同步、Windows 进程辅助
 assets/     方块、物品、界面、环境、字体等原版风格素材
 bin/        mc2d_client.exe / mc2d_server.exe
-build.bat   使用 CMake 构建
-start_game.bat
-start_server.bat
 ```
 
 ## 说明
@@ -115,5 +108,5 @@ start_server.bat
 - 这是一个非官方、非商业的同人项目，与原版 Minecraft 无隶属关系。
 - 2D 横版中，原版的前后移动 (`W`/`S`) 不适用，因此使用 `A`/`D` 左右移动；跳跃仍是空格，潜行/疾跑/交互等键位尽量保持原版。
 - 本项目只使用 `assets/` 中提供的图像素材；没有额外音频素材，因此当前没有音效。
-- Debug 构建需要 MSVC 调试运行库；如果目标机器没有，可使用 `build.bat Release` 构建 Release 配置。
+- Debug 构建需要 MSVC 调试运行库；如果目标机器没有
 - 玩家数据按世界文件名分别保存，例如 `world.mc2d` 对应 `world.players.json`。

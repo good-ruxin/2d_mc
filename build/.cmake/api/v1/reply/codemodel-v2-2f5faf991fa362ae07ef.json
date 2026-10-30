@@ -1,0 +1,284 @@
+{
+	"configurations" : 
+	[
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "OpenGL::GL::@52310b9926f245239ea7",
+					"jsonFile" : "target-OpenGL__GL-Debug-2212c5b9696135f664e8.json",
+					"name" : "OpenGL::GL",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "OpenGL::GLU::@52310b9926f245239ea7",
+					"jsonFile" : "target-OpenGL__GLU-Debug-e7293aeebbf0109a7197.json",
+					"name" : "OpenGL::GLU",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Threads::Threads::@843777d5bb59419b5c48",
+					"jsonFile" : "target-Threads__Threads-Debug-05f30f4dd8ec9cc6d9e3.json",
+					"name" : "Threads::Threads",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "nlohmann_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-nlohmann_json-Debug-9a65f5ec01892c5272c6.json",
+					"name" : "nlohmann_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "nlohmann_json::nlohmann_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-nlohmann_json__nlohmann_json-Debug-8098e0265f446e84b0b8.json",
+					"name" : "nlohmann_json::nlohmann_json",
+					"projectIndex" : 0
+				}
+			],
+			"directories" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						3,
+						4
+					],
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-b5805d5c08fd3d92def4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						1,
+						2,
+						3
+					]
+				},
+				{
+					"build" : "raylib_build",
+					"childIndexes" : 
+					[
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-raylib_build-Debug-b49d1f69c56568afe2b7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "raylib",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1
+					],
+					"build" : "raylib_build/raylib",
+					"childIndexes" : 
+					[
+						3
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-raylib_build.raylib-Debug-cd7a861c37d50e4a7b10.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "raylib/src",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						2
+					],
+					"build" : "raylib_build/raylib/external/glfw",
+					"childIndexes" : 
+					[
+						4
+					],
+					"jsonFile" : "directory-raylib_build.raylib.external.glfw-Debug-cb23a728c331a3af5dd5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "raylib/src/external/glfw"
+				},
+				{
+					"build" : "raylib_build/raylib/external/glfw/src",
+					"jsonFile" : "directory-raylib_build.raylib.external.glfw.src-Debug-e34b9a32835d4cbfefef.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 2,
+					"source" : "raylib/src/external/glfw/src",
+					"targetIndexes" : 
+					[
+						0,
+						6
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						3,
+						4
+					],
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Minecraft2D",
+					"targetIndexes" : 
+					[
+						1,
+						2,
+						3
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1
+					],
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1,
+						2
+					],
+					"name" : "raylib",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						3,
+						4
+					],
+					"name" : "GLFW",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						0,
+						6
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 4,
+					"id" : "glfw::@0007fcb0029cba81045f",
+					"jsonFile" : "target-glfw-Debug-5161618081f08a674ed8.json",
+					"name" : "glfw",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mc2d::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mc2d-Debug-f9267c62476718a62511.json",
+					"name" : "mc2d",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mc2d_client::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mc2d_client-Debug-db1e479e889f0666010d.json",
+					"name" : "mc2d_client",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mc2d_server::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mc2d_server-Debug-c4babc132c9eca60889d.json",
+					"name" : "mc2d_server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "raylib::@52310b9926f245239ea7",
+					"jsonFile" : "target-raylib-Debug-2bbbe7311971d44cde18.json",
+					"name" : "raylib",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "uninstall::@18eff071ff3fd9fe1150",
+					"jsonFile" : "target-uninstall-Debug-cca5e444e77604cf34a8.json",
+					"name" : "uninstall",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "update_mappings::@0007fcb0029cba81045f",
+					"jsonFile" : "target-update_mappings-Debug-e59df434cca1a98a0f9a.json",
+					"name" : "update_mappings",
+					"projectIndex" : 2
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/win/Documents/Projects/2d_mc/build",
+		"source" : "C:/Users/win/Documents/Projects/2d_mc"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 11
+	}
+}

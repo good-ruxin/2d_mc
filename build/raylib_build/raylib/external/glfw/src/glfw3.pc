@@ -1,7 +1,7 @@
-prefix=C:/Program Files/2d_mc
+prefix=C:/Program Files (x86)/Minecraft2D
 exec_prefix=${prefix}
-includedir=C:/Program Files/2d_mc/include
-libdir=C:/Program Files/2d_mc/lib
+includedir=C:/Program Files (x86)/Minecraft2D/include
+libdir=C:/Program Files (x86)/Minecraft2D/lib
 
 Name: GLFW
 Description: A multi-platform library for OpenGL, window and input

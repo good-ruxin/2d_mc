@@ -9,7 +9,7 @@ namespace mc {
 namespace {
 
 const BlockDef kBlocks[] = {
-    // id, display, texture, solid, opaque, replaceable, cutout, liquid, hardness, tool, tier, light, drop, min, max
+    // id, display, texture, solid, opaque, replaceable, cutout, liquid, hardness, tool, tier, light, drop, min, max, container gui
     {"air", "空气", "", false, false, true, false, false, 0.0f, ToolType::None, 0, 0, "", 0, 0},
     {"grass_block", "草方块", "block/grass_block_side", true, true, false, false, false, 0.6f, ToolType::Shovel, 0, 0, "dirt", 1, 1},
     {"dirt", "泥土", "block/dirt", true, true, false, false, false, 0.5f, ToolType::Shovel, 0, 0, "dirt", 1, 1},
@@ -21,14 +21,14 @@ const BlockDef kBlocks[] = {
     {"oak_leaves", "橡树树叶", "block/oak_leaves", true, false, false, true, false, 0.2f, ToolType::Axe, 0, 0, "oak_sapling", 1, 1},
     {"oak_planks", "橡木木板", "block/oak_planks", true, true, false, false, false, 2.0f, ToolType::Axe, 0, 0, "oak_planks", 1, 1},
     {"coal_ore", "煤矿石", "block/coal_ore", true, true, false, false, false, 3.0f, ToolType::Pickaxe, 1, 0, "coal", 1, 2},
-    {"iron_ore", "铁矿石", "block/iron_ore", true, true, false, false, false, 3.0f, ToolType::Pickaxe, 2, 0, "iron_ingot", 1, 2},
-    {"gold_ore", "金矿石", "block/gold_ore", true, true, false, false, false, 3.0f, ToolType::Pickaxe, 3, 0, "gold_ingot", 1, 1},
+    {"iron_ore", "铁矿石", "block/iron_ore", true, true, false, false, false, 3.0f, ToolType::Pickaxe, 2, 0, "raw_iron", 1, 2},
+    {"gold_ore", "金矿石", "block/gold_ore", true, true, false, false, false, 3.0f, ToolType::Pickaxe, 3, 0, "raw_gold", 1, 1},
     {"diamond_ore", "钻石矿石", "block/diamond_ore", true, true, false, false, false, 3.0f, ToolType::Pickaxe, 4, 0, "diamond", 1, 2},
     {"bedrock", "基岩", "block/bedrock", true, true, false, false, false, -1.0f, ToolType::None, 0, 0, "", 0, 0},
     {"water", "水", "block/water_still", false, false, true, false, true, -1.0f, ToolType::None, 0, 0, "", 0, 0},
     {"lava", "熔岩", "block/lava_still", false, false, true, false, true, -1.0f, ToolType::None, 0, 15, "", 0, 0},
     {"torch", "火把", "block/torch", false, false, false, true, false, 0.0f, ToolType::None, 0, 14, "torch", 1, 1},
-    {"crafting_table", "工作台", "block/crafting_table_front", true, true, false, false, false, 2.5f, ToolType::Axe, 0, 0, "crafting_table", 1, 1},
+    {"crafting_table", "工作台", "block/crafting_table_front", true, true, false, false, false, 2.5f, ToolType::Axe, 0, 0, "crafting_table", 1, 1, ContainerGui::CraftingTable},
     {"glass", "玻璃", "block/glass", true, false, false, true, false, 0.3f, ToolType::None, 0, 0, "", 0, 0},
     {"stone_bricks", "石砖", "block/stone_bricks", true, true, false, false, false, 1.5f, ToolType::Pickaxe, 1, 0, "stone_bricks", 1, 1},
     {"short_grass", "矮草", "block/short_grass", false, false, true, true, false, 0.0f, ToolType::None, 0, 0, "", 0, 0},
@@ -36,6 +36,8 @@ const BlockDef kBlocks[] = {
     {"poppy", "虞美人", "block/poppy", false, false, true, true, false, 0.0f, ToolType::None, 0, 0, "poppy", 1, 1},
     {"dandelion", "蒲公英", "block/dandelion", false, false, true, true, false, 0.0f, ToolType::None, 0, 0, "dandelion", 1, 1},
     {"oak_sapling", "橡树树苗", "block/oak_sapling", false, false, true, true, false, 0.0f, ToolType::None, 0, 0, "oak_sapling", 1, 1},
+    {"furnace", "熔炉", "block/furnace_front", true, true, false, false, false, 3.5f, ToolType::Pickaxe, 1, 0, "furnace", 1, 1, ContainerGui::Furnace},
+    {"chest", "箱子", "entity/chest/normal", true, true, false, false, false, 2.5f, ToolType::Axe, 0, 0, "chest", 1, 1, ContainerGui::Chest},
 };
 
 constexpr int kBlockCount = static_cast<int>(sizeof(kBlocks) / sizeof(kBlocks[0]));
@@ -81,6 +83,8 @@ std::vector<ItemDef> buildItems() {
     add("stick", "木棍", "item/stick", 64, ToolType::None, 0, 1.0f, 1, 0);
     add("coal", "煤炭", "item/coal", 64, ToolType::None, 0, 1.0f, 1, 0);
     add("charcoal", "木炭", "item/charcoal", 64, ToolType::None, 0, 1.0f, 1, 0);
+    add("raw_iron", "粗铁", "item/raw_iron", 64, ToolType::None, 0, 1.0f, 1, 0);
+    add("raw_gold", "粗金", "item/raw_gold", 64, ToolType::None, 0, 1.0f, 1, 0);
     add("iron_ingot", "铁锭", "item/iron_ingot", 64, ToolType::None, 0, 1.0f, 1, 0);
     add("gold_ingot", "金锭", "item/gold_ingot", 64, ToolType::None, 0, 1.0f, 1, 0);
     add("diamond", "钻石", "item/diamond", 64, ToolType::None, 0, 1.0f, 1, 0);
@@ -112,24 +116,38 @@ std::vector<ItemDef> buildItemList() {
 }
 
 std::vector<Recipe> buildRecipes() {
+    // grid 2 = craftable from the player inventory (crafting_table.png);
+    // grid 3 = requires a crafting table (crafting_table.png 3x3 area).
     return {
-        {"planks", "橡木木板", "oak_planks", 4, {{"oak_log", 1}}},
-        {"stick", "木棍", "stick", 4, {{"oak_planks", 2}}},
-        {"crafting_table", "工作台", "crafting_table", 1, {{"oak_planks", 4}}},
-        {"torch", "火把", "torch", 4, {{"coal", 1}, {"stick", 1}}},
-        {"torch_charcoal", "火把（木炭）", "torch", 4, {{"charcoal", 1}, {"stick", 1}}},
-        {"stone_bricks", "石砖", "stone_bricks", 4, {{"stone", 4}}},
-        {"wooden_pickaxe", "木镐", "wooden_pickaxe", 1, {{"oak_planks", 3}, {"stick", 2}}},
-        {"stone_pickaxe", "石镐", "stone_pickaxe", 1, {{"cobblestone", 3}, {"stick", 2}}},
-        {"iron_pickaxe", "铁镐", "iron_pickaxe", 1, {{"iron_ingot", 3}, {"stick", 2}}},
-        {"diamond_pickaxe", "钻石镐", "diamond_pickaxe", 1, {{"diamond", 3}, {"stick", 2}}},
-        {"wooden_axe", "木斧", "wooden_axe", 1, {{"oak_planks", 3}, {"stick", 2}}},
-        {"stone_axe", "石斧", "stone_axe", 1, {{"cobblestone", 3}, {"stick", 2}}},
-        {"iron_axe", "铁斧", "iron_axe", 1, {{"iron_ingot", 3}, {"stick", 2}}},
-        {"wooden_sword", "木剑", "wooden_sword", 1, {{"oak_planks", 2}, {"stick", 1}}},
-        {"stone_sword", "石剑", "stone_sword", 1, {{"cobblestone", 2}, {"stick", 1}}},
-        {"iron_sword", "铁剑", "iron_sword", 1, {{"iron_ingot", 2}, {"stick", 1}}},
-        {"diamond_sword", "钻石剑", "diamond_sword", 1, {{"diamond", 2}, {"stick", 1}}},
+        {"planks", "橡木木板", "oak_planks", 4, {{"oak_log", 1}}, 2},
+        {"stick", "木棍", "stick", 4, {{"oak_planks", 2}}, 2},
+        {"crafting_table", "工作台", "crafting_table", 1, {{"oak_planks", 4}}, 2},
+        {"furnace", "熔炉", "furnace", 1, {{"cobblestone", 8}}, 2},
+        {"chest", "箱子", "chest", 1, {{"oak_planks", 8}}, 2},
+        {"torch", "火把", "torch", 4, {{"coal", 1}, {"stick", 1}}, 2},
+        {"torch_charcoal", "火把（木炭）", "torch", 4, {{"charcoal", 1}, {"stick", 1}}, 2},
+        {"stone_bricks", "石砖", "stone_bricks", 4, {{"stone", 4}}, 3},
+        {"wooden_pickaxe", "木镐", "wooden_pickaxe", 1, {{"oak_planks", 3}, {"stick", 2}}, 3},
+        {"stone_pickaxe", "石镐", "stone_pickaxe", 1, {{"cobblestone", 3}, {"stick", 2}}, 3},
+        {"iron_pickaxe", "铁镐", "iron_pickaxe", 1, {{"iron_ingot", 3}, {"stick", 2}}, 3},
+        {"diamond_pickaxe", "钻石镐", "diamond_pickaxe", 1, {{"diamond", 3}, {"stick", 2}}, 3},
+        {"wooden_axe", "木斧", "wooden_axe", 1, {{"oak_planks", 3}, {"stick", 2}}, 3},
+        {"stone_axe", "石斧", "stone_axe", 1, {{"cobblestone", 3}, {"stick", 2}}, 3},
+        {"iron_axe", "铁斧", "iron_axe", 1, {{"iron_ingot", 3}, {"stick", 2}}, 3},
+        {"wooden_sword", "木剑", "wooden_sword", 1, {{"oak_planks", 2}, {"stick", 1}}, 3},
+        {"stone_sword", "石剑", "stone_sword", 1, {{"cobblestone", 2}, {"stick", 1}}, 3},
+        {"iron_sword", "铁剑", "iron_sword", 1, {{"iron_ingot", 2}, {"stick", 1}}, 3},
+        {"diamond_sword", "钻石剑", "diamond_sword", 1, {{"diamond", 2}, {"stick", 1}}, 3},
+    };
+}
+
+std::vector<SmeltRecipe> buildSmelts() {
+    return {
+        {"raw_iron", "iron_ingot", 1},
+        {"raw_gold", "gold_ingot", 1},
+        {"sand", "glass", 1},
+        {"oak_log", "charcoal", 1},
+        {"porkchop", "cooked_porkchop", 1},
     };
 }
 
@@ -163,6 +181,34 @@ const ItemDef* itemDef(const std::string& id) {
 const std::vector<Recipe>& allRecipes() {
     static const std::vector<Recipe> recipes = buildRecipes();
     return recipes;
+}
+
+ContainerGui blockGui(BlockId id) { return blockDef(id).gui; }
+
+const std::vector<SmeltRecipe>& allSmeltRecipes() {
+    static const std::vector<SmeltRecipe> recipes = buildSmelts();
+    return recipes;
+}
+
+const SmeltRecipe* smeltRecipe(const std::string& input) {
+    if (input.empty()) return nullptr;
+    for (const auto& recipe : allSmeltRecipes()) {
+        if (recipe.input == input) return &recipe;
+    }
+    return nullptr;
+}
+
+bool isFuel(const std::string& id) { return fuelTicks(id) > 0; }
+
+int fuelTicks(const std::string& id) {
+    // Values follow vanilla burn times (1 item = 200 ticks).
+    if (id == "coal" || id == "charcoal") return 1600;
+    if (id == "oak_planks" || id == "stick") return 300;
+    if (id == "oak_log") return 300;
+    if (id == "oak_sapling") return 100;
+    if (id == "crafting_table") return 300;
+    if (id == "chest") return 300;
+    return 0;
 }
 
 bool isBlockItem(const std::string& item, BlockId* out) {
