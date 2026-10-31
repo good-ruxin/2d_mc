@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{BF00ADE4-09D5-394D-ACE4-FD9B79F2E9BC}</ProjectGuid>
+    <ProjectGuid>{581BAEEA-502F-3073-8E55-3CFFCBC856B5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -33,22 +33,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -59,39 +59,45 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">raylib.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">raylib</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">raylib.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">raylib</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">raylib.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">raylib</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">raylib.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">raylib</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\raylib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Users/win/Documents/2d_mc/raylib/src/external/glfw/include" /utf-8</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Users\win\Documents\Projects\2d_mc\raylib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Users/win/Documents/Projects/2d_mc/raylib/src/external/glfw/include" /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>
       </ExceptionHandling>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <MinimalRebuild></MinimalRebuild>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
       <UseFullPaths>false</UseFullPaths>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -99,10 +105,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\raylib\src;C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\win\Documents\Projects\2d_mc\raylib\src;C:\Users\win\Documents\Projects\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\raylib\src;C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\win\Documents\Projects\2d_mc\raylib\src;C:\Users\win\Documents\Projects\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -115,19 +121,25 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\raylib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Users/win/Documents/2d_mc/raylib/src/external/glfw/include" /utf-8</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Users\win\Documents\Projects\2d_mc\raylib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Users/win/Documents/Projects/2d_mc/raylib/src/external/glfw/include" /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
       <ExceptionHandling>
       </ExceptionHandling>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <MinimalRebuild></MinimalRebuild>
       <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
       <UseFullPaths>false</UseFullPaths>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -137,10 +149,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\raylib\src;C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\win\Documents\Projects\2d_mc\raylib\src;C:\Users\win\Documents\Projects\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\raylib\src;C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\win\Documents\Projects\2d_mc\raylib\src;C:\Users\win\Documents\Projects\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -153,19 +165,25 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\raylib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Users/win/Documents/2d_mc/raylib/src/external/glfw/include" /utf-8</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Users\win\Documents\Projects\2d_mc\raylib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Users/win/Documents/Projects/2d_mc/raylib/src/external/glfw/include" /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
       <ExceptionHandling>
       </ExceptionHandling>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <MinimalRebuild></MinimalRebuild>
       <Optimization>MinSpace</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
       <UseFullPaths>false</UseFullPaths>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -175,10 +193,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\raylib\src;C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\win\Documents\Projects\2d_mc\raylib\src;C:\Users\win\Documents\Projects\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\raylib\src;C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\win\Documents\Projects\2d_mc\raylib\src;C:\Users\win\Documents\Projects\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -191,20 +209,26 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\raylib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Users/win/Documents/2d_mc/raylib/src/external/glfw/include" /utf-8</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Users\win\Documents\Projects\2d_mc\raylib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Users/win/Documents/Projects/2d_mc/raylib/src/external/glfw/include" /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>
       </ExceptionHandling>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <MinimalRebuild></MinimalRebuild>
       <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
       <UseFullPaths>false</UseFullPaths>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -212,10 +236,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\raylib\src;C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\win\Documents\Projects\2d_mc\raylib\src;C:\Users\win\Documents\Projects\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\win\Documents\2d_mc\raylib\src;C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\win\Documents\Projects\2d_mc\raylib\src;C:\Users\win\Documents\Projects\2d_mc\raylib\src\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -227,11 +251,11 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\win\Documents\2d_mc\raylib\src\CMakeLists.txt">
+    <CustomBuild Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/win/Documents/2d_mc/raylib/src/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/win/Documents/Projects/2d_mc/raylib/src/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/win/Documents/2d_mc -BC:/Users/win/Documents/2d_mc/build --check-stamp-file C:/Users/win/Documents/2d_mc/build/raylib_build/raylib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/win/Documents/Projects/2d_mc -BC:/Users/win/Documents/Projects/2d_mc/build --check-stamp-file C:/Users/win/Documents/Projects/2d_mc/build/raylib_build/raylib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -239,12 +263,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CPack.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CPackComponent.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindOpenGL.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\GNUInstallDirs.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Templates\CPackConfig.cmake.in;C:\Users\win\Documents\2d_mc\raylib\cmake\CompileDefinitions.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\GlfwImport.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\InstallConfigurations.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\JoinPaths.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\LibraryConfigurations.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\LibraryPathToLinkerFlags.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\PackConfigurations.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\PopulateConfigVariablesLocally.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\raylib-config-version.cmake;C:\Users\win\Documents\2d_mc\raylib\raylib.pc.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.4\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.4\Templates\CPackConfig.cmake.in;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\CompileDefinitions.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\GlfwImport.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\InstallConfigurations.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\JoinPaths.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\LibraryConfigurations.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\LibraryPathToLinkerFlags.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\PackConfigurations.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\PopulateConfigVariablesLocally.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\raylib-config-version.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\raylib.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/win/Documents/2d_mc/raylib/src/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/win/Documents/Projects/2d_mc/raylib/src/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/win/Documents/2d_mc -BC:/Users/win/Documents/2d_mc/build --check-stamp-file C:/Users/win/Documents/2d_mc/build/raylib_build/raylib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/win/Documents/Projects/2d_mc -BC:/Users/win/Documents/Projects/2d_mc/build --check-stamp-file C:/Users/win/Documents/Projects/2d_mc/build/raylib_build/raylib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -252,12 +276,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CPack.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CPackComponent.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindOpenGL.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\GNUInstallDirs.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Templates\CPackConfig.cmake.in;C:\Users\win\Documents\2d_mc\raylib\cmake\CompileDefinitions.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\GlfwImport.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\InstallConfigurations.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\JoinPaths.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\LibraryConfigurations.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\LibraryPathToLinkerFlags.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\PackConfigurations.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\PopulateConfigVariablesLocally.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\raylib-config-version.cmake;C:\Users\win\Documents\2d_mc\raylib\raylib.pc.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.4\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.4\Templates\CPackConfig.cmake.in;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\CompileDefinitions.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\GlfwImport.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\InstallConfigurations.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\JoinPaths.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\LibraryConfigurations.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\LibraryPathToLinkerFlags.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\PackConfigurations.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\PopulateConfigVariablesLocally.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\raylib-config-version.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\raylib.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/win/Documents/2d_mc/raylib/src/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/win/Documents/Projects/2d_mc/raylib/src/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/win/Documents/2d_mc -BC:/Users/win/Documents/2d_mc/build --check-stamp-file C:/Users/win/Documents/2d_mc/build/raylib_build/raylib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/win/Documents/Projects/2d_mc -BC:/Users/win/Documents/Projects/2d_mc/build --check-stamp-file C:/Users/win/Documents/Projects/2d_mc/build/raylib_build/raylib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -265,12 +289,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CPack.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CPackComponent.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindOpenGL.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\GNUInstallDirs.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Templates\CPackConfig.cmake.in;C:\Users\win\Documents\2d_mc\raylib\cmake\CompileDefinitions.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\GlfwImport.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\InstallConfigurations.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\JoinPaths.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\LibraryConfigurations.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\LibraryPathToLinkerFlags.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\PackConfigurations.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\PopulateConfigVariablesLocally.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\raylib-config-version.cmake;C:\Users\win\Documents\2d_mc\raylib\raylib.pc.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-4.4\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.4\Templates\CPackConfig.cmake.in;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\CompileDefinitions.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\GlfwImport.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\InstallConfigurations.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\JoinPaths.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\LibraryConfigurations.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\LibraryPathToLinkerFlags.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\PackConfigurations.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\PopulateConfigVariablesLocally.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\raylib-config-version.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\raylib.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/win/Documents/2d_mc/raylib/src/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/win/Documents/Projects/2d_mc/raylib/src/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/win/Documents/2d_mc -BC:/Users/win/Documents/2d_mc/build --check-stamp-file C:/Users/win/Documents/2d_mc/build/raylib_build/raylib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/win/Documents/Projects/2d_mc -BC:/Users/win/Documents/Projects/2d_mc/build --check-stamp-file C:/Users/win/Documents/Projects/2d_mc/build/raylib_build/raylib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -278,54 +302,54 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CPack.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CPackComponent.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindOpenGL.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\GNUInstallDirs.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Templates\CPackConfig.cmake.in;C:\Users\win\Documents\2d_mc\raylib\cmake\CompileDefinitions.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\GlfwImport.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\InstallConfigurations.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\JoinPaths.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\LibraryConfigurations.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\LibraryPathToLinkerFlags.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\PackConfigurations.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\PopulateConfigVariablesLocally.cmake;C:\Users\win\Documents\2d_mc\raylib\cmake\raylib-config-version.cmake;C:\Users\win\Documents\2d_mc\raylib\raylib.pc.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-4.4\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.4\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.4\Templates\CPackConfig.cmake.in;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\CompileDefinitions.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\GlfwImport.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\InstallConfigurations.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\JoinPaths.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\LibraryConfigurations.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\LibraryPathToLinkerFlags.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\PackConfigurations.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\PopulateConfigVariablesLocally.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\cmake\raylib-config-version.cmake;C:\Users\win\Documents\Projects\2d_mc\raylib\raylib.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\raylib\src\raudio.c" />
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\raylib\src\rcore.c" />
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\raylib\src\rmodels.c" />
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\raylib\src\rshapes.c" />
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\raylib\src\rtext.c" />
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\raylib\src\rtextures.c" />
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\raylib\src\utils.c" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\context.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\init.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\input.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\monitor.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\platform.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\vulkan.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\window.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\egl_context.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\osmesa_context.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\null_init.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\null_monitor.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\null_window.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\null_joystick.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_module.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_time.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_thread.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_init.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_joystick.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_monitor.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_window.obj" />
-    <Object Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\wgl_context.obj" />
-    <ClInclude Include="C:\Users\win\Documents\2d_mc\raylib\src\raylib.h" />
-    <ClInclude Include="C:\Users\win\Documents\2d_mc\raylib\src\rlgl.h" />
-    <ClInclude Include="C:\Users\win\Documents\2d_mc\raylib\src\raymath.h" />
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\raudio.c" />
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\rcore.c" />
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\rmodels.c" />
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\rshapes.c" />
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\rtext.c" />
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\rtextures.c" />
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\utils.c" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\context.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\init.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\input.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\monitor.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\platform.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\vulkan.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\window.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\egl_context.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\osmesa_context.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\null_init.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\null_monitor.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\null_window.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\null_joystick.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_module.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_time.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_thread.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_init.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_joystick.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_monitor.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\win32_window.obj" />
+    <Object Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.dir\$(Configuration)\wgl_context.obj" />
+    <ClInclude Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\raylib.h" />
+    <ClInclude Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\rlgl.h" />
+    <ClInclude Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\raymath.h" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="C:\Users\win\Documents\2d_mc\build\ZERO_CHECK.vcxproj">
-      <Project>{93A7F55F-91F7-3716-A314-9BD0B703E4E9}</Project>
+    <ProjectReference Include="C:\Users\win\Documents\Projects\2d_mc\build\ZERO_CHECK.vcxproj">
+      <Project>{59594EEE-6728-3E1C-9450-52C44D4423A9}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.vcxproj">
-      <Project>{1022082B-2767-30B4-9C97-42AAF7ED9E05}</Project>
+    <ProjectReference Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\glfw.vcxproj">
+      <Project>{68DFFC0E-6DC9-3FF1-A795-53C1E91C97E8}</Project>
       <Name>glfw</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

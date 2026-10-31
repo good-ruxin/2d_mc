@@ -1,0 +1,18 @@
+^C:\USERS\WIN\DOCUMENTS\PROJECTS\2D_MC\BUILD\CMAKEFILES\A2788CD0A501FBC2B7B08167542B7B15\MC2D.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\WIN\DOCUMENTS\PROJECTS\2D_MC\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/win/Documents/Projects/2d_mc -BC:/Users/win/Documents/Projects/2d_mc/build --check-stamp-file C:/Users/win/Documents/Projects/2d_mc/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,19 +1,19 @@
 # CMake generation dependency list for this directory.
-C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/CPack.cmake
-C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/CPackComponent.cmake
-C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/FindOpenGL.cmake
-C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/FindPackageHandleStandardArgs.cmake
-C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/FindPackageMessage.cmake
-C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/GNUInstallDirs.cmake
-C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Templates/CPackConfig.cmake.in
-C:/Users/win/Documents/2d_mc/raylib/cmake/CompileDefinitions.cmake
-C:/Users/win/Documents/2d_mc/raylib/cmake/GlfwImport.cmake
-C:/Users/win/Documents/2d_mc/raylib/cmake/InstallConfigurations.cmake
-C:/Users/win/Documents/2d_mc/raylib/cmake/JoinPaths.cmake
-C:/Users/win/Documents/2d_mc/raylib/cmake/LibraryConfigurations.cmake
-C:/Users/win/Documents/2d_mc/raylib/cmake/LibraryPathToLinkerFlags.cmake
-C:/Users/win/Documents/2d_mc/raylib/cmake/PackConfigurations.cmake
-C:/Users/win/Documents/2d_mc/raylib/cmake/PopulateConfigVariablesLocally.cmake
-C:/Users/win/Documents/2d_mc/raylib/cmake/raylib-config-version.cmake
-C:/Users/win/Documents/2d_mc/raylib/raylib.pc.in
-C:/Users/win/Documents/2d_mc/raylib/src/CMakeLists.txt
+C:/Program Files/CMake/share/cmake-4.4/Modules/CPack.cmake
+C:/Program Files/CMake/share/cmake-4.4/Modules/CPackComponent.cmake
+C:/Program Files/CMake/share/cmake-4.4/Modules/FindOpenGL.cmake
+C:/Program Files/CMake/share/cmake-4.4/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-4.4/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-4.4/Modules/GNUInstallDirs.cmake
+C:/Program Files/CMake/share/cmake-4.4/Templates/CPackConfig.cmake.in
+C:/Users/win/Documents/Projects/2d_mc/raylib/cmake/CompileDefinitions.cmake
+C:/Users/win/Documents/Projects/2d_mc/raylib/cmake/GlfwImport.cmake
+C:/Users/win/Documents/Projects/2d_mc/raylib/cmake/InstallConfigurations.cmake
+C:/Users/win/Documents/Projects/2d_mc/raylib/cmake/JoinPaths.cmake
+C:/Users/win/Documents/Projects/2d_mc/raylib/cmake/LibraryConfigurations.cmake
+C:/Users/win/Documents/Projects/2d_mc/raylib/cmake/LibraryPathToLinkerFlags.cmake
+C:/Users/win/Documents/Projects/2d_mc/raylib/cmake/PackConfigurations.cmake
+C:/Users/win/Documents/Projects/2d_mc/raylib/cmake/PopulateConfigVariablesLocally.cmake
+C:/Users/win/Documents/Projects/2d_mc/raylib/cmake/raylib-config-version.cmake
+C:/Users/win/Documents/Projects/2d_mc/raylib/raylib.pc.in
+C:/Users/win/Documents/Projects/2d_mc/raylib/src/CMakeLists.txt

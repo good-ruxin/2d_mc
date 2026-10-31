@@ -1,6 +1,6 @@
-^C:\USERS\WIN\DOCUMENTS\2D_MC\BUILD\CMAKEFILES\C43EC0EAB981225223ACE063186EDE8D\GENERATE.STAMP.RULE
+^C:\USERS\WIN\DOCUMENTS\PROJECTS\2D_MC\BUILD\CMAKEFILES\A2788CD0A501FBC2B7B08167542B7B15\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/win/Documents/2d_mc -BC:/Users/win/Documents/2d_mc/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/win/Documents/2d_mc/build/Minecraft2D.sln
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/win/Documents/Projects/2d_mc -BC:/Users/win/Documents/Projects/2d_mc/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/win/Documents/Projects/2d_mc/build/Minecraft2D.slnx
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

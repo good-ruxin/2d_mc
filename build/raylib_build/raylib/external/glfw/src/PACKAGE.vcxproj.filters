@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\win\Documents\2d_mc\build\CMakeFiles\ef522187007683f6d0b2782ef97190de\PACKAGE_force.rule">
+    <CustomBuild Include="C:\Users\win\Documents\Projects\2d_mc\build\CMakeFiles\af9eb022a0d074f4bc50bc2780eaffc2\PACKAGE_force.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{40609A73-A4DE-37E5-A3A0-91C255AC07B5}</UniqueIdentifier>
+      <UniqueIdentifier>{A7103316-E430-3972-B0BF-5DE523240D54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

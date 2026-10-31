@@ -2,7 +2,7 @@
   "Steve": {
     "air": 300,
     "creative": false,
-    "food": 14,
+    "food": 4,
     "health": 14,
     "inventory": [
       {
@@ -14,25 +14,19 @@
         "id": "wooden_axe"
       },
       {
-        "count": 1,
-        "id": "crafting_table"
+        "count": 8,
+        "id": "cobblestone"
       },
       {
-        "count": 15,
+        "count": 16,
         "id": "torch"
       },
-      {
-        "count": 32,
-        "id": "oak_planks"
-      },
+      null,
       {
         "count": 16,
         "id": "dirt"
       },
-      {
-        "count": 2,
-        "id": "cobblestone"
-      },
+      null,
       {
         "count": 4,
         "id": "bread"
@@ -41,9 +35,12 @@
         "count": 1,
         "id": "wooden_sword"
       },
+      null,
+      null,
+      null,
       {
-        "count": 5,
-        "id": "raw_iron"
+        "count": 4,
+        "id": "stick"
       },
       null,
       null,
@@ -61,19 +58,22 @@
       null,
       null,
       null,
+      {
+        "count": 5,
+        "id": "raw_iron"
+      },
       null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      {
+        "count": 30,
+        "id": "oak_planks"
+      },
       null,
       null,
       null,
       null
     ],
-    "selected": 3,
-    "x": 485.3310241699219,
-    "y": 115.9892807006836
+    "selected": 0,
+    "x": 483.6992492675781,
+    "y": 116.92925262451172
   }
 }

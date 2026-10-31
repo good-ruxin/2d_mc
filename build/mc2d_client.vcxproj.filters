@@ -1,37 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\src\client\main.cpp">
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\src\client\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\src\client\assets.cpp">
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\src\client\assets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\src\client\platform_win32.cpp">
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\src\client\platform_win32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\src\common\blocks.cpp">
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\src\common\blocks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\src\common\world.cpp">
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\src\common\world.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\src\common\physics.cpp">
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\src\common\physics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\win\Documents\2d_mc\src\common\net.cpp">
+    <ClCompile Include="C:\Users\win\Documents\Projects\2d_mc\src\common\net.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\win\Documents\2d_mc\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\win\Documents\Projects\2d_mc\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Natvis Include="C:\Users\win\Documents\2d_mc\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_json.natvis" />
+    <Natvis Include="C:\Users\win\Documents\Projects\2d_mc\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_json.natvis" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{A4345F08-9B13-39CE-B5D2-02169B0D67A8}</UniqueIdentifier>
+      <UniqueIdentifier>{1AE02459-1F58-3255-B16C-A0A03E5C441D}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

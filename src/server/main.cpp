@@ -71,9 +71,9 @@ constexpr int CHEST_SIZE = 54;
 constexpr int SMELT_TICKS = 200;
 
 struct ContainerPos {
-    int x = 0;
-    int y = 0;
-    std::string gui;  // "crafting_table", "furnace" or "chest"
+    int x = 0;           // World x coordinate; zero for player-only screens.
+    int y = 0;           // World y coordinate; zero for player-only screens.
+    std::string gui;     // Active screen kind: inventory, crafting_table, furnace, or chest.
     bool operator<(const ContainerPos& other) const {
         if (y != other.y) return y < other.y;
         if (x != other.x) return x < other.x;
@@ -85,12 +85,12 @@ struct ContainerPos {
 };
 
 struct FurnaceState {
-    ItemStack input;
-    ItemStack fuel;
-    ItemStack output;
-    int burnTime = 0;
-    int burnTotal = 0;
-    int cookTime = 0;
+    ItemStack input;     // Smeltable item stack.
+    ItemStack fuel;      // Fuel stack (may become an empty bucket).
+    ItemStack output;    // Completed smelt products.
+    int burnTime = 0;    // Remaining active burn ticks.
+    int burnTotal = 0;   // Total ticks for the current fuel item; drives flame UI.
+    int cookTime = 0;    // Progress toward the next product.
 };
 
 struct Entity {
@@ -115,8 +115,8 @@ struct Player {
     int id = 0;
     std::string name;
     PlayerBody body;
-    std::vector<ItemStack> inv;
-    ItemStack cursor;
+    std::vector<ItemStack> inv;  // Authoritative 36-slot player inventory.
+    ItemStack cursor;            // Stack currently carried by the container cursor.
     int selected = 0;
     int health = 20;
     int food = 20;
@@ -140,16 +140,16 @@ struct Player {
     float spawnY = 0.0f;
     bool joined = false;
     int joinedTick = 0;
-    std::vector<ItemStack> craftGrid = std::vector<ItemStack>(CRAFT_GRID_SLOTS);
-    ContainerPos container;  // valid while the player has a container screen open
-    int containerTick = -1;
+    std::vector<ItemStack> craftGrid = std::vector<ItemStack>(CRAFT_GRID_SLOTS); // Per-player crafting grid.
+    ContainerPos container;  // Active GUI and backing block position, if any.
+    int containerTick = -1;  // Tick when opened; used to avoid same-tick interaction races.
 };
 
 struct Client {
     int id = 0;
     std::shared_ptr<NetSocket> socket;
-    std::thread reader;
-    std::mutex sendMutex;
+    std::thread reader;         // Socket reader feeding the server message queue.
+    std::mutex sendMutex;       // Serializes framed writes to this connection.
     std::atomic<bool> alive{true};
     bool joined = false;
 };
@@ -266,8 +266,8 @@ private:
     uint64_t lastSaveTick_ = 0;
     bool shutdownDone_ = false;
     bool worldChangeDirty_ = false;
-    std::map<ContainerPos, FurnaceState> furnaces_;
-    std::map<ContainerPos, std::vector<ItemStack>> chests_;
+    std::map<ContainerPos, FurnaceState> furnaces_;              // Persistent furnace slot/progress state.
+    std::map<ContainerPos, std::vector<ItemStack>> chests_;       // Persistent 54-slot chest inventories.
     bool containersDirty_ = false;
     bool containersSaved_ = true;
     std::vector<ItemStack> furnaceVector;
@@ -1267,6 +1267,12 @@ private:
 
     void openContainer(Player& player, const std::string& gui, int x, int y) {
         if (player.dead) return;
+        if (gui == "inventory") {
+            player.container = ContainerPos{0, 0, gui};
+            player.containerTick = static_cast<int>(tick_);
+            sendContainer(player);
+            return;
+        }
         if (gui != "crafting_table" && gui != "furnace" && gui != "chest") return;
         if (gui == "crafting_table") {
             if (player.container.gui != gui) {
@@ -1276,7 +1282,8 @@ private:
             sendContainer(player);
             return;
         }
-        // Block containers must still exist and the player must stand next to them.
+        // Never trust a client-side GUI open request for a world container:
+        // confirm the backing block and server-side reach before exposing slots.
         if (world_.fg(x, y) != (gui == "furnace" ? FURNACE : CHEST)) return;
         if (!reachable(player, x, y)) return;
         ContainerPos pos{x, y, gui};
@@ -1302,7 +1309,7 @@ private:
 
     bool containerStillValid(const Player& player) const {
         if (player.container.gui.empty()) return false;
-        if (player.container.gui == "crafting_table") return true;
+        if (player.container.gui == "inventory" || player.container.gui == "crafting_table") return true;
         BlockId block = player.container.gui == "furnace" ? FURNACE : CHEST;
         return world_.fg(player.container.x, player.container.y) == block &&
                reachable(player, player.container.x, player.container.y);
@@ -1327,7 +1334,9 @@ private:
             }
             player.cursor.clear();
         }
-        if (player.container.gui == "crafting_table") returnGridToInventory(player);
+        if (player.container.gui == "inventory" || player.container.gui == "crafting_table") {
+            returnGridToInventory(player);
+        }
         if (player.container.gui == "furnace") storeFurnaceSlots(player.container);
         player.container = ContainerPos{};
         player.containerTick = -1;
@@ -1337,6 +1346,8 @@ private:
     }
 
     json containerJson(Player& player) {
+        // One authoritative snapshot drives both the inventory and active GUI;
+        // stable slot IDs let the client send clicks without local mutations.
         json message = {
             {"type", "container"},
             {"gui", player.container.gui},
@@ -1348,6 +1359,21 @@ private:
             {"viewers", chestViewers_.count(player.container) ? static_cast<int>(chestViewers_[player.container].size()) : 0},
             {"tick", tick_},
         };
+        if (player.container.gui == "inventory" || player.container.gui == "crafting_table") {
+            const int size = player.container.gui == "crafting_table" ? 3 : 2;
+            std::vector<ItemStack> grid(player.craftGrid.begin(), player.craftGrid.begin() + size * size);
+            const std::string resultId = recipeOutputForGrid(grid, size);
+            ItemStack result;
+            if (!resultId.empty()) {
+                for (const auto& recipe : allRecipes()) {
+                    if (recipe.id == resultId) {
+                        result = makeStack(recipe.output, recipe.outputCount);
+                        break;
+                    }
+                }
+            }
+            message["craftResult"] = stackJson(result);
+        }
         json slots = json::array();
         for (const auto& stack : player.inv) slots.push_back(stackJson(stack));
         message["slots"] = slots;
@@ -1480,17 +1506,21 @@ private:
     }
 
     void handleSlotClick(Player& player, int slot, int button, bool shift) {
+        // Validate the active container before resolving a client-provided slot.
         if (player.dead) return;
+        if (player.container.gui.empty()) return;
         if (!player.container.gui.empty() && !containerStillValid(player)) {
             closeInventory(player);
             return;
         }
         const bool tableOpen = player.container.gui == "crafting_table";
+        const bool inventoryOpen = player.container.gui == "inventory";
         const int gridSize = gridLimit(player);
         // Slot 45 (CRAFT_OUT) belongs to the crafting output.
         if (slot == CRAFT_OUT) {
+            if (!tableOpen && !inventoryOpen) return;
             craftFromGrid(player, gridSize, shift);
-            if (tableOpen) sendInventory(player);
+            sendInventory(player);
             sendContainer(player);
             return;
         }
@@ -1499,7 +1529,8 @@ private:
         if (slot >= 0 && slot < INV_SIZE) {
             storage = &player.inv;
             index = slot;
-        } else if (slot >= CRAFT_SLOT && slot < CRAFT_SLOT + gridSize * gridSize) {
+        } else if ((tableOpen || inventoryOpen) &&
+                   slot >= CRAFT_SLOT && slot < CRAFT_SLOT + gridSize * gridSize) {
             storage = &player.craftGrid;
             index = slot - CRAFT_SLOT;
         } else if (player.container.gui == "furnace") {
@@ -1638,6 +1669,7 @@ private:
     // or move a single item when a stack is held.
     void handleSwapHotbar(Player& player, int slot, int hotbar) {
         if (player.dead || hotbar < 0 || hotbar >= HOTBAR_SIZE) return;
+        if (player.container.gui.empty()) return;
         if (!player.container.gui.empty() && !containerStillValid(player)) {
             closeInventory(player);
             return;
@@ -1647,7 +1679,8 @@ private:
         if (slot >= 0 && slot < INV_SIZE) {
             storage = &player.inv;
             index = slot;
-        } else if (slot >= CRAFT_SLOT && slot < CRAFT_SLOT + CRAFT_GRID_SLOTS) {
+        } else if ((player.container.gui == "inventory" || player.container.gui == "crafting_table") &&
+                   slot >= CRAFT_SLOT && slot < CRAFT_SLOT + CRAFT_GRID_SLOTS) {
             storage = &player.craftGrid;
             index = slot - CRAFT_SLOT;
         } else if (player.container.gui == "furnace") {

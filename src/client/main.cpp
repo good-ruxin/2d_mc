@@ -259,6 +259,11 @@ struct PendingInput {
     MoveInput input;
 };
 
+struct ContainerSlotView {
+    int id = -1;          // Shared server slot number used by slot_click/swap_hotbar messages.
+    Rectangle bounds{};   // Screen-space hitbox derived from the corresponding GUI texture.
+};
+
 enum class Screen {
     Title,
     Settings,
@@ -296,6 +301,7 @@ private:
     Overlay overlay_ = Overlay::None;
     bool quit_ = false;
 
+    // Authoritative world/player state and the local rendering prediction.
     bool hasWorld_ = false;
     World world_;
     int myId_ = -1;
@@ -304,6 +310,18 @@ private:
     PlayerBody body_;
     std::vector<ItemStack> inventory_ = std::vector<ItemStack>(INV_SIZE);
     ItemStack cursorStack_;
+    // Server snapshots for the active container; these never own gameplay state.
+    std::vector<ItemStack> craftingGrid_ = std::vector<ItemStack>(9);
+    std::vector<ItemStack> chestSlots_ = std::vector<ItemStack>(54);
+    std::array<ItemStack, 3> furnaceSlots_{};
+    ItemStack craftResult_;
+    std::string containerGui_;
+    int containerViewers_ = 0;
+    int furnaceBurnTime_ = 0;
+    int furnaceBurnTotal_ = 0;
+    int furnaceCookTime_ = 0;
+    int furnaceCookTotal_ = 200;
+    float containerScale_ = 3.0f;
     int selected_ = 0;
     int health_ = 20;
     int food_ = 20;
@@ -312,6 +330,7 @@ private:
     bool creative_ = false;
     bool flying_ = false;
 
+    // Input sequence numbers and unacknowledged inputs used by client prediction.
     uint32_t seq_ = 0;
     uint32_t ack_ = 0;
     std::deque<PendingInput> pending_;
@@ -346,6 +365,7 @@ private:
     MoveInput desiredInput_{};
     float uiScale_ = 3;
 
+    // Interpolated remote players/entities and transient visual effects.
     std::map<int, RemotePlayer> remotes_;
     std::map<int, EntityView> entities_;
     std::vector<Particle> particles_;
@@ -360,6 +380,7 @@ private:
     bool showDebug_ = false;
     bool showPlayerList_ = false;
 
+    // Connection/retry state and an optional locally launched server process.
     std::string address_ = "127.0.0.1:25565";
     std::string lastAddress_;
     bool lastWasLocal_ = true;
@@ -372,6 +393,7 @@ private:
     float spawnX_ = 0;
     float spawnY_ = 0;
 
+    // Recomputed screen-space controls and inventory slot hitboxes.
     std::array<Rectangle, 3> titleButtons_{};
     Rectangle settingsBack_{};
     Rectangle discRetry_{};
@@ -381,9 +403,7 @@ private:
     Rectangle deathRespawn_{};
     Rectangle deathTitle_{};
     Rectangle invPanel_{};
-    std::array<Rectangle, INV_SIZE> invSlots_{};
-    std::vector<Rectangle> recipeRects_;
-    std::vector<int> recipeIds_;
+    std::vector<ContainerSlotView> containerSlots_;
 
     std::mt19937 rng_{std::random_device{}()};
 
@@ -423,6 +443,7 @@ private:
     void handleSelf(const json& self);
     void handleSnapshot(const json& m);
     void handleInventory(const json& m);
+    void handleContainer(const json& m);
     void handleStats(const json& m);
     void handleBlock(const json& m);
 
@@ -633,6 +654,7 @@ void Game::disconnectToTitle(const std::string& reason) {
     hasWorld_ = false;
     myId_ = -1;
     dead_ = false;
+    containerGui_.clear();
     overlay_ = Overlay::None;
     chatOpen_ = false;
     pending_.clear();
@@ -705,6 +727,8 @@ void Game::processMessage(const json& m) {
         if (m.contains("time")) worldTime_ = m.value("time", worldTime_);
     } else if (type == "inventory") {
         handleInventory(m);
+    } else if (type == "container") {
+        handleContainer(m);
     } else if (type == "stats") {
         handleStats(m);
     } else if (type == "block") {
@@ -883,6 +907,58 @@ void Game::handleInventory(const json& m) {
     selected_ = std::clamp(m.value("selected", selected_), 0, HOTBAR_SIZE - 1);
 }
 
+void Game::handleContainer(const json& m) {
+    // Container packets are snapshots: the server remains the source of truth
+    // for every slot and the client only derives screen-space hitboxes.
+    handleInventory(m);
+    containerGui_ = m.value("gui", "");
+    if (containerGui_.empty()) {
+        overlay_ = Overlay::None;
+        craftResult_.clear();
+        return;
+    }
+
+    auto readStacks = [](const json& value, std::vector<ItemStack>& output) {
+        for (auto& stack : output) stack.clear();
+        if (!value.is_array()) return;
+        for (size_t i = 0; i < value.size() && i < output.size(); ++i) {
+            const auto& item = value[i];
+            if (!item.is_object()) continue;
+            output[i].id = item.value("id", "");
+            output[i].count = item.value("count", 0);
+            if (output[i].count <= 0) output[i].clear();
+        }
+    };
+
+    if (m.contains("grid")) readStacks(m["grid"], craftingGrid_);
+    if (m.contains("chest")) readStacks(m["chest"], chestSlots_);
+    if (m.contains("furnace") && m["furnace"].is_object()) {
+        const auto& furnace = m["furnace"];
+        const std::array<std::string, 3> names{"input", "fuel", "output"};
+        for (size_t i = 0; i < names.size(); ++i) {
+            furnaceSlots_[i].clear();
+            const auto& item = furnace.value(names[i], json(nullptr));
+            if (!item.is_object()) continue;
+            furnaceSlots_[i].id = item.value("id", "");
+            furnaceSlots_[i].count = item.value("count", 0);
+            if (furnaceSlots_[i].count <= 0) furnaceSlots_[i].clear();
+        }
+        furnaceBurnTime_ = furnace.value("burnTime", 0);
+        furnaceBurnTotal_ = furnace.value("burnTotal", 0);
+        furnaceCookTime_ = furnace.value("cookTime", 0);
+        furnaceCookTotal_ = std::max(1, furnace.value("cookTotal", 200));
+    }
+    craftResult_.clear();
+    if (m.contains("craftResult") && m["craftResult"].is_object()) {
+        craftResult_.id = m["craftResult"].value("id", "");
+        craftResult_.count = m["craftResult"].value("count", 0);
+        if (craftResult_.count <= 0) craftResult_.clear();
+    }
+    containerViewers_ = m.value("viewers", 0);
+    overlay_ = Overlay::Inventory;
+    buildInventoryLayout();
+}
+
 void Game::handleStats(const json& m) {
     health_ = m.value("health", health_);
     food_ = m.value("food", food_);
@@ -1046,7 +1122,7 @@ void Game::updatePlaying(float dt) {
             chatOpen_ = false;
         } else if (overlay_ == Overlay::Inventory) {
             net_.send(json{{"type", "close_inventory"}});
-            cursorStack_.clear();
+            containerGui_.clear();
             overlay_ = Overlay::None;
         } else if (overlay_ == Overlay::Pause) {
             overlay_ = Overlay::None;
@@ -1058,10 +1134,12 @@ void Game::updatePlaying(float dt) {
     if (IsKeyPressed(KEY_E) && !dead_) {
         if (overlay_ == Overlay::Inventory) {
             net_.send(json{{"type", "close_inventory"}});
-            cursorStack_.clear();
+            containerGui_.clear();
             overlay_ = Overlay::None;
         } else if (overlay_ == Overlay::None) {
+            containerGui_ = "inventory";
             overlay_ = Overlay::Inventory;
+            net_.send(json{{"type", "open_container"}, {"gui", "inventory"}, {"x", 0}, {"y", 0}});
             buildInventoryLayout();
         }
     }
@@ -1307,7 +1385,26 @@ void Game::handleGameplayInput(float dt) {
 
         if (hoverValid_) {
             if (world_.fg(hoverX_, hoverY_) == CRAFTING_TABLE && !IsKeyDown(KEY_LEFT_SHIFT)) {
+                containerGui_ = "crafting_table";
                 overlay_ = Overlay::Inventory;
+                net_.send(json{{"type", "open_container"}, {"gui", "crafting_table"},
+                               {"x", hoverX_}, {"y", hoverY_}});
+                buildInventoryLayout();
+                return;
+            }
+            if (world_.fg(hoverX_, hoverY_) == FURNACE) {
+                containerGui_ = "furnace";
+                overlay_ = Overlay::Inventory;
+                net_.send(json{{"type", "open_container"}, {"gui", "furnace"},
+                               {"x", hoverX_}, {"y", hoverY_}});
+                buildInventoryLayout();
+                return;
+            }
+            if (world_.fg(hoverX_, hoverY_) == CHEST) {
+                containerGui_ = "chest";
+                overlay_ = Overlay::Inventory;
+                net_.send(json{{"type", "open_container"}, {"gui", "chest"},
+                               {"x", hoverX_}, {"y", hoverY_}});
                 buildInventoryLayout();
                 return;
             }
@@ -1384,30 +1481,29 @@ std::string Game::currentHeldItem() const {
 }
 
 void Game::handleInventoryInput() {
-    if (!IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) return;
-
+    // Keep slot decisions server-authoritative; the client sends intent only.
     Vector2 mouse = GetMousePosition();
-    const int button = IsMouseButtonPressed(MOUSE_BUTTON_RIGHT) ? 1 : 0;
-    const bool shift = IsKeyDown(KEY_LEFT_SHIFT);
-
-    for (int i = 0; i < INV_SIZE; ++i) {
-        if (CheckCollisionPointRec(mouse, invSlots_[i])) {
-            net_.send(json{
-                {"type", "slot_click"},
-                {"slot", i},
-                {"button", button},
-                {"shift", shift}
-            });
-            return;
+    for (int hotbar = 0; hotbar < HOTBAR_SIZE; ++hotbar) {
+        if (!IsKeyPressed(KEY_ONE + hotbar)) continue;
+        for (const auto& slot : containerSlots_) {
+            if (CheckCollisionPointRec(mouse, slot.bounds)) {
+                net_.send(json{{"type", "swap_hotbar"}, {"slot", slot.id}, {"hotbar", hotbar}});
+                return;
+            }
         }
     }
 
-    for (size_t i = 0; i < recipeRects_.size(); ++i) {
-        if (CheckCollisionPointRec(mouse, recipeRects_[i])) {
-            const auto& recipes = allRecipes();
-            if (recipeIds_[i] >= 0 && recipeIds_[i] < static_cast<int>(recipes.size())) {
-                net_.send(json{{"type", "craft"}, {"recipe", recipes[recipeIds_[i]].id}});
-            }
+    const bool left = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    const bool right = IsMouseButtonPressed(MOUSE_BUTTON_RIGHT);
+    if (!left && !right) return;
+    for (const auto& slot : containerSlots_) {
+        if (CheckCollisionPointRec(mouse, slot.bounds)) {
+            net_.send(json{
+                {"type", "slot_click"},
+                {"slot", slot.id},
+                {"button", right ? 1 : 0},
+                {"shift", IsKeyDown(KEY_LEFT_SHIFT)}
+            });
             return;
         }
     }
@@ -1674,7 +1770,7 @@ void Game::drawTitle() {
     Texture2D& bg = assets_.tex("gui/title/background/Background.jpg");
     DrawTexturePro(bg, Rectangle{0, 0, (float)bg.width, (float)bg.height},
                    Rectangle{0, 0, w, h}, Vector2{0, 0}, 0, WHITE);
-    DrawRectangle(0, 0, w, h, Color{0, 0, 0, 105});
+    DrawRectangle(0, 0, static_cast<int>(w), static_cast<int>(h), Color{0, 0, 0, 105});
 
     Texture2D& logo = assets_.tex("gui/title/minecraft.png");
     const float lw = std::min(w * 0.68f, 820.0f);
@@ -2158,101 +2254,135 @@ void Game::drawHud() {
 }
 
 void Game::buildInventoryLayout() {
+    // Slot coordinates follow the 176px vanilla GUI layouts and shared slot IDs.
     const float w = static_cast<float>(GetScreenWidth());
     const float h = static_cast<float>(GetScreenHeight());
+    const bool chest = containerGui_ == "chest";
+    const float sourceHeight = chest ? 222.0f : 166.0f;
+    containerScale_ = std::min({3.0f, (w - 32.0f) / 176.0f, (h - 32.0f) / sourceHeight});
+    containerScale_ = std::max(1.0f, containerScale_);
+    const float panelWidth = 176.0f * containerScale_;
+    const float panelHeight = sourceHeight * containerScale_;
+    invPanel_ = Rectangle{(w - panelWidth) * 0.5f, (h - panelHeight) * 0.5f,
+                          panelWidth, panelHeight};
 
-    const float pw = std::min(1080.0f, w - 80.0f);
-    const float ph = std::min(620.0f, h - 80.0f);
-    invPanel_ = Rectangle{(w - pw) * 0.5f, (h - ph) * 0.5f, pw, ph};
+    containerSlots_.clear();
+    auto addSlot = [&](int id, float x, float y) {
+        containerSlots_.push_back(ContainerSlotView{
+            id, Rectangle{invPanel_.x + x * containerScale_, invPanel_.y + y * containerScale_,
+                          18.0f * containerScale_, 18.0f * containerScale_}});
+    };
 
-    const float slot = 52;
-    const float gap = 3;
-    const float gridX = invPanel_.x + 220;
-    const float gridY = invPanel_.y + 120;
-
+    const float mainY = chest ? 140.0f : 84.0f;
+    const float hotbarY = chest ? 198.0f : 142.0f;
     for (int row = 0; row < 3; ++row) {
-        for (int col = 0; col < 9; ++col) {
-            int idx = 9 + row * 9 + col;
-            invSlots_[idx] = Rectangle{gridX + col * (slot + gap),
-                                       gridY + row * (slot + gap), slot, slot};
-        }
+        for (int col = 0; col < 9; ++col) addSlot(9 + row * 9 + col, 8.0f + col * 18.0f, mainY + row * 19.0f);
     }
-    const float hotbarY = gridY + 3 * (slot + gap) + 24;
-    for (int col = 0; col < 9; ++col) {
-        invSlots_[col] = Rectangle{gridX + col * (slot + gap), hotbarY, slot, slot};
-    }
+    for (int col = 0; col < HOTBAR_SIZE; ++col) addSlot(col, 8.0f + col * 18.0f, hotbarY);
 
-    recipeRects_.clear();
-    recipeIds_.clear();
-    const auto& recipes = allRecipes();
-    const float rx = invPanel_.x + 760;
-    const float ry = invPanel_.y + 110;
-    const float rw = invPanel_.width - 780;
-    const float rh = 27;
-    for (int i = 0; i < static_cast<int>(recipes.size()) && i < 16; ++i) {
-        recipeRects_.push_back(Rectangle{rx, ry + i * (rh + 4), rw, rh});
-        recipeIds_.push_back(i);
+    if (containerGui_ == "inventory") {
+        for (int i = 0; i < 4; ++i) addSlot(36 + i, 98.0f + (i % 2) * 18.0f, 18.0f + (i / 2) * 18.0f);
+        addSlot(45, 154.0f, 28.0f);
+    } else if (containerGui_ == "crafting_table") {
+        for (int i = 0; i < 9; ++i) addSlot(36 + i, 30.0f + (i % 3) * 18.0f, 17.0f + (i / 3) * 18.0f);
+        addSlot(45, 120.0f, 35.0f);
+    } else if (containerGui_ == "furnace") {
+        addSlot(46, 56.0f, 17.0f);
+        addSlot(47, 56.0f, 53.0f);
+        addSlot(48, 116.0f, 35.0f);
+    } else if (chest) {
+        for (int i = 0; i < 54; ++i) addSlot(49 + i, 8.0f + (i % 9) * 18.0f, 18.0f + (i / 9) * 18.0f);
     }
 }
 
 void Game::drawInventory() {
+    // Draw the original container texture first, then current server slot data.
     buildInventoryLayout();
 
     const float w = static_cast<float>(GetScreenWidth());
     const float h = static_cast<float>(GetScreenHeight());
     DrawRectangle(0, 0, static_cast<int>(w), static_cast<int>(h), Color{0, 0, 0, 150});
+    const float sourceHeight = containerGui_ == "chest" ? 222.0f : 166.0f;
+    const std::string texture = containerGui_ == "chest"
+                                    ? "gui/container/generic_54"
+                                    : "gui/container/" + (containerGui_.empty() ? "inventory" : containerGui_);
+    Texture2D& background = assets_.tex(texture);
+    DrawTexturePro(background, Rectangle{0, 0, 176, sourceHeight}, invPanel_,
+                   Vector2{0, 0}, 0, WHITE);
 
-    drawPanel(invPanel_);
-    drawText("物品栏", invPanel_.x + 30, invPanel_.y + 22, 30, WHITE);
-    drawText("E / Esc 关闭", invPanel_.x + invPanel_.width - 150, invPanel_.y + 30, 14,
-             Color{200, 200, 200, 255});
+    std::string title = "物品栏";
+    if (containerGui_ == "crafting_table") title = "工作台";
+    else if (containerGui_ == "furnace") title = "熔炉";
+    else if (containerGui_ == "chest") title = "箱子";
+    drawText(title, invPanel_.x + 8.0f * containerScale_, invPanel_.y + 5.0f * containerScale_,
+             8.0f * containerScale_, Color{64, 64, 64, 255}, false);
+    if (containerGui_ == "chest") {
+        drawText("物品栏", invPanel_.x + 8.0f * containerScale_, invPanel_.y + 128.0f * containerScale_,
+                 8.0f * containerScale_, Color{64, 64, 64, 255}, false);
+        if (containerViewers_ > 1) {
+            drawText(std::to_string(containerViewers_) + " 位玩家正在查看",
+                     invPanel_.x + 8.0f * containerScale_, invPanel_.y - 24.0f, 16, WHITE);
+        }
+    }
 
     Vector2 mouse = GetMousePosition();
     std::string tooltip;
-
-    auto drawSlot = [&](int i) {
-        const Rectangle r = invSlots_[i];
-        const bool hover = CheckCollisionPointRec(mouse, r);
-
-        Texture2D& slotTex = assets_.tex("gui/sprites/container/slot");
-        DrawTexturePro(slotTex, Rectangle{0, 0, 18, 18}, r, Vector2{0, 0}, 0,
-                       hover ? Color{180, 200, 180, 255} : WHITE);
-        if (i == selected_) DrawRectangleLinesEx(r, 2, Color{255, 220, 80, 255});
-
-        drawItemStack(inventory_[i], Rectangle{r.x + 6, r.y + 6, r.width - 12, r.height - 12}, 1.0f);
-        if (hover && !inventory_[i].empty()) tooltip = itemName(inventory_[i].id);
+    auto stackAt = [&](int id) -> const ItemStack& {
+        if (id >= 0 && id < INV_SIZE) return inventory_[id];
+        if (id >= 36 && id < 45) return craftingGrid_[id - 36];
+        if (id == 45) return craftResult_;
+        if (id >= 46 && id <= 48) return furnaceSlots_[id - 46];
+        if (id >= 49 && id < 103) return chestSlots_[id - 49];
+        static const ItemStack empty;
+        return empty;
     };
-
-    for (int i = 9; i < INV_SIZE; ++i) drawSlot(i);
-    for (int i = 0; i < HOTBAR_SIZE; ++i) drawSlot(i);
-
-    drawText("合成配方", invPanel_.x + 760, invPanel_.y + 70, 20, Color{255, 220, 100, 255});
-    const auto& recipes = allRecipes();
-    for (size_t i = 0; i < recipeRects_.size(); ++i) {
-        const Rectangle r = recipeRects_[i];
+    for (const auto& slot : containerSlots_) {
+        const Rectangle r = slot.bounds;
         const bool hover = CheckCollisionPointRec(mouse, r);
-        DrawRectangleRounded(r, 0.15f, 4, hover ? Color{85, 80, 105, 240} : Color{35, 33, 42, 220});
-        DrawRectangleLinesEx(r, 1, hover ? Color{210, 190, 250, 255} : Color{80, 75, 95, 200});
+        if (slot.id == selected_ && slot.id >= 0 && slot.id < HOTBAR_SIZE) {
+            DrawRectangleLinesEx(r, std::max(2.0f, containerScale_), Color{255, 220, 80, 255});
+        }
+        const ItemStack& stack = stackAt(slot.id);
+        const float inset = containerScale_;
+        drawItemStack(stack, Rectangle{r.x + inset, r.y + inset,
+                                       r.width - inset * 2, r.height - inset * 2}, containerScale_);
+        if (hover) {
+            DrawRectangle(static_cast<int>(r.x), static_cast<int>(r.y),
+                          static_cast<int>(r.width), static_cast<int>(r.height), Color{255, 255, 255, 45});
+            if (!stack.empty()) tooltip = itemName(stack.id);
+        }
+    }
 
-        const int idx = recipeIds_[i];
-        if (idx >= 0 && idx < static_cast<int>(recipes.size())) {
-            const Recipe& rec = recipes[idx];
-            drawItemIcon(rec.output, Rectangle{r.x + 4, r.y + 4, 20, 20});
-            drawText(rec.name, r.x + 30, r.y + 5, 13, WHITE);
-            if (hover) {
-                std::string s;
-                for (const auto& [item, count] : rec.inputs) {
-                    if (!s.empty()) s += " + ";
-                    s += std::to_string(count) + " " + itemName(item);
-                }
-                tooltip = s;
-            }
+    if (containerGui_ == "furnace") {
+        const float burnRatio = furnaceBurnTotal_ > 0
+                                    ? std::clamp(static_cast<float>(furnaceBurnTime_) / furnaceBurnTotal_, 0.0f, 1.0f)
+                                    : 0.0f;
+        const float cookRatio = std::clamp(static_cast<float>(furnaceCookTime_) / furnaceCookTotal_, 0.0f, 1.0f);
+        if (burnRatio > 0) {
+            Texture2D& flame = assets_.tex("gui/sprites/container/furnace/lit_progress");
+            const float height = flame.height * burnRatio;
+            DrawTexturePro(flame,
+                           Rectangle{0, flame.height - height, static_cast<float>(flame.width), height},
+                           Rectangle{invPanel_.x + 56.0f * containerScale_,
+                                     invPanel_.y + (51.0f - height) * containerScale_,
+                                     flame.width * containerScale_, height * containerScale_},
+                           Vector2{0, 0}, 0, WHITE);
+        }
+        if (cookRatio > 0) {
+            Texture2D& arrow = assets_.tex("gui/sprites/container/furnace/burn_progress");
+            DrawTexturePro(arrow, Rectangle{0, 0, arrow.width * cookRatio, static_cast<float>(arrow.height)},
+                           Rectangle{invPanel_.x + 79.0f * containerScale_,
+                                     invPanel_.y + 35.0f * containerScale_,
+                                     arrow.width * containerScale_ * cookRatio,
+                                     arrow.height * containerScale_},
+                           Vector2{0, 0}, 0, WHITE);
         }
     }
 
     if (!cursorStack_.empty()) {
-        const float size = 44;
-        drawItemStack(cursorStack_, Rectangle{mouse.x - size * 0.5f, mouse.y - size * 0.5f, size, size}, 1.0f);
+        const float size = 16.0f * containerScale_;
+        drawItemStack(cursorStack_, Rectangle{mouse.x - size * 0.5f, mouse.y - size * 0.5f, size, size},
+                      containerScale_);
     }
     if (!tooltip.empty()) drawTooltip(tooltip, mouse);
 }

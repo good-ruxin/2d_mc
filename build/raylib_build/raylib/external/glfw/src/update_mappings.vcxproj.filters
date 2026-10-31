@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\win\Documents\2d_mc\build\CMakeFiles\ef522187007683f6d0b2782ef97190de\update_mappings.rule">
+    <CustomBuild Include="C:\Users\win\Documents\Projects\2d_mc\build\CMakeFiles\af9eb022a0d074f4bc50bc2780eaffc2\update_mappings.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\src\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\external\glfw\src\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\src\mappings.h.in">
+    <None Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\external\glfw\src\mappings.h.in">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="C:\Users\win\Documents\2d_mc\raylib\src\external\glfw\CMake\GenerateMappings.cmake" />
-    <None Include="C:\Users\win\Documents\2d_mc\build\raylib_build\raylib\external\glfw\src\CMakeFiles\update_mappings" />
+    <None Include="C:\Users\win\Documents\Projects\2d_mc\raylib\src\external\glfw\CMake\GenerateMappings.cmake" />
+    <None Include="C:\Users\win\Documents\Projects\2d_mc\build\raylib_build\raylib\external\glfw\src\CMakeFiles\update_mappings" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{40609A73-A4DE-37E5-A3A0-91C255AC07B5}</UniqueIdentifier>
+      <UniqueIdentifier>{A7103316-E430-3972-B0BF-5DE523240D54}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{B4405214-E625-3B31-B98C-4C4704726B09}</UniqueIdentifier>
+      <UniqueIdentifier>{2CC855A8-F58A-3963-B48F-F1C61CBCF86E}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

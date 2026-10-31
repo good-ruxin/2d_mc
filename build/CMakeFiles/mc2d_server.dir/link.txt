@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\mc2d_server.dir/objects.a
-"C:\Program Files (x86)\mingw\bin\ar.exe" qc CMakeFiles\mc2d_server.dir/objects.a @CMakeFiles\mc2d_server.dir\objects1.rsp
-"C:\Program Files (x86)\mingw\bin\g++.exe" -g -Wl,--whole-archive CMakeFiles\mc2d_server.dir/objects.a -Wl,--no-whole-archive -o C:\Users\win\Documents\Projects\2d_mc\bin\mc2d_server.exe -Wl,--out-implib,libmc2d_server.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\mc2d_server.dir\linkLibs.rsp
